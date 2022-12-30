@@ -7,4 +7,4 @@ assignees: ''
 
 ---
 
-As a *role* I can *action* so that *desired outcome*
+As a **role** I can **action** so that **desired outcome**
