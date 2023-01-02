@@ -78,6 +78,9 @@ TEMPLATES = [
     },
 ]
 
+# Override default user model with custom user model
+AUTH_USER_MODEL = 'account.Account'
+
 WSGI_APPLICATION = 'blogrum.wsgi.application'
 
 
