@@ -29,6 +29,7 @@ class MyAccountManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
+
 # Custom General User Model
 class Account(AbstractBaseUser):
     email = models.EmailField(max_length=60, unique=True)

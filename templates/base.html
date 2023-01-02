@@ -21,7 +21,7 @@
 <body class="d-flex flex-column min-vh-100">
     <header>
         <nav class="darker-blue navbar navbar-expand-lg">
-            <a class="navbar-brand" href="#"><span class="logo-font">BLOGRUM</span></a>
+            <a class="navbar-brand" href="{% url 'home' %}"><span class="logo-font">BLOGRUM</span></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <i class="fa-sharp fa-solid fa-bars hamburger"></i>
             </button>
@@ -37,18 +37,21 @@
                 {% if user.is_authenticated %}
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Options
+                    {{request.user.username}}
                   </a>
                   <div class="dropdown-menu darker-blue" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="#">View Booked Times</a>
                     <a class="dropdown-item" href="#">Update Info</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Logout</a>
+                    <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
                   </div>
                 </li>
                 {% else %}
                 <li class="nav-item active">
-                  <a class="nav-link" href="#">Login</a>
+                  <a class="nav-link" href="{% url 'login' %}">Login</a>
+                </li>
+                <li class="nav-item active">
+                  <a class="nav-link" href="{% url 'register' %}">Register</a>
                 </li>
                 {% endif %}
               </ul>
