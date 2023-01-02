@@ -1,0 +1,48 @@
+body{
+    background-color: #00336a;
+    font-family: 'Roboto', sans-serif;
+    color: #007bff;
+}
+
+.logo-font{
+    font-family: 'Permanent Marker', cursive;
+    font-size: larger;
+    letter-spacing: 2px;
+}
+
+.darker-blue{
+    background-color: rgb(28, 34, 53);
+}
+
+.box-shadow-bottom{
+    box-shadow: -12px 17px 0px 0px #000000;
+}
+
+.carousel {
+    height: 30vh;
+    overflow: hidden;
+}
+
+.img-fluid{
+    align-content: center;
+}
+
+.footer-p{
+    font-size: smaller;
+}
+
+.fa-brands:hover{
+    color: #00b8ff;
+}
+
+.dropdown-menu a{
+    color: #007bff;
+}
+
+.dropdown-divider{
+    border-color: #007bff;
+}
+
+.hamburger{
+    color: #007bff;
+}

@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 from pathlib import Path
 import os
 import dj_database_url
+
 if os.path.isfile("env.py"):
     import env
 
@@ -30,7 +31,8 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['blogrum.herokuapp.com', 'localhost',  '127.0.0.1']
+ALLOWED_HOSTS = ['blogrum.herokuapp.com', 'localhost', '127.0.0.1']
+CSRF_TRUSTED_ORIGINS = ['https://8000-frnbdn-project4-d9qa47f21yy.ws-us80.gitpod.io']
 
 
 # Application definition
@@ -45,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'cloudinary',
     'feed',
+    'account'
 ]
 
 MIDDLEWARE = [
