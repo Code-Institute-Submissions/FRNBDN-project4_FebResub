@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate
 from account.models import Account
 
+
 class UserRegistrationForm(UserCreationForm):
     email = forms.EmailField(max_length=60)
 
@@ -40,4 +41,5 @@ class UpdateUsernameForm(forms.ModelForm):
                                                      username=username)
         except Account.DoesNotExist:
             return username
-        raise forms.ValidationError('Username "%s" is already taken' % account.username)
+        raise forms.ValidationError('Username "%s" is already taken'
+                                    % account.username)

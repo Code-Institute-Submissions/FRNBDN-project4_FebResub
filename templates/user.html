@@ -2,20 +2,23 @@
 {% load static %}
 
 {% block content %}
+    {% if request.user.username == profile.username %}
+        <h5>Account {{ request.user.email }}</h5>
+        <form method="post" >
+            {% csrf_token %}
+            {{ username_form.as_p }}
+            
+            {% for error in username_form.errors %}
+                <p>{{error}}</p>
+            {% endfor %}
 
-    <h5>Account: {{ request.user.email }}</h5>
-    <form method="post" >
-        {% csrf_token %}
-        {{ username_form.as_p }}
-        
-        {% for error in username_form.errors %}
-            <p>{{error}}</p>
-        {% endfor %}
+            {% if username_form.non_field_errors %}
+                <p>{{ username_form.non_field_errors }}</p>
+            {% endif %}
+            <button type="submit"> Update</button>
+        </form>
 
-        {% if username_form.non_field_errors %}
-            <p>{{ username_form.non_field_errors }}</p>
-        {% endif %}
-        <button type="submit"> Update</button>
-    </form>
-
+    {% else %}
+        <h5>User: {{ request.user.username }}</h5>
+    {% endif %}
 {% endblock %}

@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate, logout
 from account.forms import *
 
@@ -53,21 +53,22 @@ def login_view(request):
     return render(request, 'login.html', context)
 
 
-def user_view(request):
-    if not request.user.is_authenticated:
-        return redirect('login')
-
+def user_view(request, username):
     context = {}
-
-    if request.POST:
-        form = UpdateUsernameForm(request.POST, instance=request.user)
-        if form.is_valid():
-            form.save()
-    else:
-        form = UpdateUsernameForm(
-            initial={
-                'username': request.user.username,
-            }
-        )
-    context['username_form'] = form
+    
+    profile = get_object_or_404(Account, username=username)
+    context['profile'] = profile
+    
+    if profile == request.user:
+        if request.POST:
+            form = UpdateUsernameForm(request.POST, instance=request.user)
+            if form.is_valid():
+                form.save()
+        else:
+            form = UpdateUsernameForm(
+                initial={
+                    'username': request.user.username,
+                }
+            )
+        context['username_form'] = form
     return render(request, 'user.html', context)

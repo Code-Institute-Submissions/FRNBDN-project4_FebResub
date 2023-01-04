@@ -41,7 +41,7 @@
                   </a>
                   <div class="dropdown-menu darker-blue" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="#">View Booked Times</a>
-                    <a class="dropdown-item" href="{% url 'user' %}">Update Info</a>
+                    <a class="dropdown-item" href="{% url 'user' user.username %}">Update Info</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
                   </div>
