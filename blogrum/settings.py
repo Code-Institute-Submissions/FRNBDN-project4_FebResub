@@ -34,6 +34,11 @@ DEBUG = True
 ALLOWED_HOSTS = ['blogrum.herokuapp.com', 'localhost', '127.0.0.1']
 CSRF_TRUSTED_ORIGINS = ['https://8000-frnbdn-project4-d9qa47f21yy.ws-us80.gitpod.io']
 
+# Sets email backend to console when in debug mode
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.email.backends.console.EmailBackend'
+
+
 
 # Application definition
 
