@@ -1,14 +1,18 @@
 from django.shortcuts import render
+from .models import *
+from django.views import generic
 
 
-def home_page_view(request):
-    context = {}
-    
-    list_of_values = []
-    list_of_values.append('object1')
-    list_of_values.append('object2')
-    list_of_values.append('object3')
-    list_of_values.append('object4')
+class Feed(generic.ListView):
+    model = Post
+    queryset = Post.objects.filter(listed=True).order_by('-created_on')
+    template_name = 'index.html'
+    paginate_by = 5
 
-    context['list_of_values'] = list_of_values
-    return render(request, 'index.html', context)
+
+# def home_page_view(request):
+#     context = {}
+#     feed = Post.objects.filter(listed=True).order_by('-created_on')
+#     context['feed'] = feed
+
+#     return render(request, 'index.html', context)

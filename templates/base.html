@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 
-<body class="d-flex flex-column min-vh-100">
+<body class="d-flex flex-column">
     <header>
         <nav class="darker-blue navbar navbar-expand-lg">
             <a class="navbar-brand" href="{% url 'home' %}"><span class="logo-font">BLOGRUM</span></a>
@@ -59,14 +59,13 @@
           </nav>
     </header>
 
-    <main>
+    <main class="min-vh-100">
         {% block content %}
 
         {% endblock content %}
     </main>
-      <footer>
-        <div class="footer fixed-bottom darker-blue pt-3
-        ">
+      <footer class="sticky-bottom">
+        <div class="footer darker-blue pt-3">
           <div class="container">
             <div class="row">
               <div class="col-md-4 col-lg-4">

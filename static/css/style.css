@@ -2,6 +2,11 @@ body{
     background-color: #00336a;
     font-family: 'Roboto', sans-serif;
     color: #007bff;
+
+    min-height: 100vh;
+    
+    display: flex;
+    flex-direction: column;
 }
 
 .logo-font{

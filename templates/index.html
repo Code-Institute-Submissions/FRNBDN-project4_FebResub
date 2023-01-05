@@ -2,8 +2,56 @@
 {% load static %}
 
 {% block content %}
-<div><p>hello</p></div>
-{% for value in list_of_values %}
-    <p>{{value}}</p>
-{% endfor %}
+ 
+<div class="container">
+    <div class="row">
+        <div class="d-lg-none d-lg-none col-lg-7 offset-lg-1">
+            <a href="#">Create Post</a>
+        </div>
+
+        <div class="left-column col-lg-7 offset-lg-1 infinite-container">
+                {% for post in feed %}
+            <div class="post-container infinite-item">
+                {% if 'placeholder' in post.thumbnail.url %}
+                    <img class="" src="https://res.cloudinary.com/diso2qz9e/image/upload/v1671330251/cld-sample.jpg" alt="Placeholder Image: Woman With Dog Laughing">
+                {% else %}
+                    <img class="" src="{{post.thumbnail.url}}" alt="">
+                {% endif %}
+                <a href="#" class="post-link">
+                    <h2 class="post-title">{{post.title}}</h2>
+                </a>
+                <div class="post-footer">
+                    <span class="card-footer-text">{{post.author}}</span>
+                    <span class="card-footer-text"><i class="fa-solid fa-thumbs-up"></i> {{post.number_of_likes}}</span>
+                    <span class="card-footer-text"><i class="fa-solid fa-thumbs-down"></i> {{post.number_of_dislikes}}</span>
+                    <span class="card-footer-text">{{post.created_on}}</span>
+                </div>
+            </div>
+                {% endfor %}
+                {% if page_obj.has_next %}
+                <div class="d-flex d-none">
+                    <div class="spinner-border loading" role="status">
+                        <span class="sr-only">Loading...</span>
+                      </div>
+                </div>
+                
+                <li><a href="?page={{page_obj.next_page_number}}" class="infinite-more-link"> NEXT</a></li>
+    
+                {% endif %}
+        </div>
+
+        <div class="right-column col-lg-3 d-lg-flex d-none flex-column">
+            <div class="sidebar">
+                <p>exampl</p>
+                <p>exampl</p>
+                <p>exampl</p>
+                <p>exampl</p>
+                <a href="#">Create Post</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/static/js/jquery.waypoints.min.js"></script>
+<script src="/static/js/infinite.min.js"></script>
+<script src="/static/js/infinitescroll.js"></script>
 {%endblock%}
