@@ -21,6 +21,7 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('summernote/', include('django_summernote.urls')),
     path('', home_page_view, name='home'),
     path('register/', user_reg_view, name='register'),
     path('logout/', logout_view, name='logout'),
