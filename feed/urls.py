@@ -3,8 +3,9 @@ from django.urls import path
 
 
 urlpatterns = [
+    path('create/', views.create_post, name='create'),
     path('',  views.Feed.as_view(), name='home'),
-    path('create/', views.CreatePost.as_view(), name='create'),
-    path('<slug:slug>/edit', views.UpdatePost.as_view(), name='edit'),
     path('<slug:slug>/', views.PostDetail.as_view(), name='post_detail'),
+    path('<slug:slug>/edit/', views.edit_post, name='edit'),
+
 ]

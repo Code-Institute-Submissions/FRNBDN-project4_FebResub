@@ -4,7 +4,7 @@ from django.forms import ModelForm
 from django.views import generic, View
 from django.http import HttpResponse
 from .models import *
-from .forms import PostForm, CommentForm
+from .forms import *
 
 
 class Feed(generic.ListView):
@@ -72,62 +72,36 @@ class PostDetail(View):
             )
 
 
-class CreatePost(View):
-
-    def get(self, request, *args, **kwargs):
-
-        return render(
-            request,
-            'edit_post.html',
-            {
-                'form': PostForm(),
-            }
-        )
-    
-    def post(self, request, *args, **kwargs):
-
+def create_post(request):
+    if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
-        
         if form.is_valid():
-            post = form.instance.save(commit=False)
-            post.author = Account.objects.filter(
-                    email=request.user.email).first()
+            post = form.save(commit=False)
+            post.author = request.user
             post.save()
-            form = PostForm()
-        else:
-            form = PostForm()
-
-        return render(
-            request,
-            'edit_post.html',
-            {
-                'form': PostForm(),
-            }
-        )
+            return redirect('post_detail', slug=post.slug)
+    else:
+        form = PostForm()
+    return render(request, 'edit_post.html', {'form': form, 'create': True})
 
 
-class UpdatePost(View):
-    def get(self, request, slug):
-        user = request.user
-        post = Post.objects.filter(slug=slug).all()
-
-        if post.author != user:
-            return HttpResponse("You can't edit posts you did not created!")
-        
-        if request.POST:
-            form = UpdatePost(request.POST, request.FILES)
+def edit_post(request, slug):
+    post = get_object_or_404(Post, slug=slug)
+    if post.author != request.user:
+        return HttpResponse('You may only edit posts you have created.')
+    else:
+        if request.method == "POST":
+            form = PostForm(request.POST,request.FILES, instance=post)
             if form.is_valid():
-                update = form.save(commit=False)
-                update.save()
-                success_msg = 'Updated sucessfully'
-                post = update
-        form = UpdatePost(
-            initial={
+                post = form.save(commit=False)
+                post.save()
+            return redirect('post_detail', slug=post.slug)
+        else:
+            form = PostForm(instance=post, initial={
                 'title': post.title,
                 'body': post.body,
-                'thumbnail': post.thumbnail
+                'thumbnail': post.thumbnail,
             }
-        )
-        return render(request, 'edit_post.html', {
-            'form': form,
-        })
+            )
+        return render(request, 'edit_post.html',
+                    {'form': form, 'is_create': False})

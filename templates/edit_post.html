@@ -4,19 +4,20 @@
 {% block content %}
     {% if user.is_authenticated %}
     <h2>
-        {% if form.model == CreatePost %}
+        {% if form.model == PostForm %}
             Create Post
         {% else %}
             Edit Post
         {% endif %}
     </h2>
-    <form method="post" >
+    <form method="post"
+          enctype="multipart/form-data">
         {% csrf_token %}
       
         {{ form | crispy }}
         
-    <button type="submit"> 
-        {% if form.model == CreatePost %}
+    <button type="submit" value="Upload"> 
+        {% if form.model == PostForm %}
             Create Post
         {% else %}
             Save Changes
