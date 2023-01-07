@@ -18,7 +18,7 @@ class PostDetail(View):
     def get(self, request, slug, *args, **kwargs):
         queryset = Post.objects.filter(listed=True)
         post = get_object_or_404(queryset, slug=slug)
-        comments = post.comments.all().order_by('created_on')
+        comments = post.comments.all().order_by('-created_on')
         liked = False
         disliked = True
         if post.likes.filter(id=self.request.user.id).exists():
@@ -38,38 +38,38 @@ class PostDetail(View):
             }
         )
 
-        def post(self, request, slug, *args, **kwargs):
-            queryset = Post.objects.filter(listed=True)
-            post = get_object_or_404(queryset, slug=slug)
-            comments = post.comments.all().order_by('created_on')
-            liked = False
+    def post(self, request, slug, *args, **kwargs):
+        queryset = Post.objects.filter(listed=True)
+        post = get_object_or_404(queryset, slug=slug)
+        comments = post.comments.all().order_by('-created_on')
+        liked = False
+        disliked = True
+        if post.likes.filter(id=self.request.user.id).exists():
+            liked = True
+        if post.dislikes.filter(id=self.request.user.id).exists():
             disliked = True
-            if post.likes.filter(id=self.request.user.id).exists():
-                liked = True
-            if post.dislikes.filter(id=self.request.user.id).exists():
-                disliked = True
 
-            comment_form = CommentForm(data=request.POST)
+        comment_form = CommentForm(request.POST)
 
-            if comment_form.is_valid():
-                comment_form.instance.commenter = request.user.username
-                comment = comment_form.save(commit=False)
-                comment.post = post
-                comment.save()
-            else:
-                comment_form = CommentForm()
+        if comment_form.is_valid():
+            comment_form.instance.commenter = request.user
+            comment = comment_form.save(commit=False)
+            comment.post = post
+            comment.save()
+        else:
+            comment_form = CommentForm()
 
-            return render(
-                request,
-                'post_detail.html',
-                {
-                    'post': post,
-                    'comments': comments,
-                    'liked': liked,
-                    'disliked': disliked,
-                    'comment_form': CommentForm()
-                }
-            )
+        return render(
+            request,
+            'post_detail.html',
+            {
+                'post': post,
+                'comments': comments,
+                'liked': liked,
+                'disliked': disliked,
+                'comment_form': CommentForm(),
+            }
+        )
 
 
 def create_post(request):
@@ -105,3 +105,20 @@ def edit_post(request, slug):
             )
         return render(request, 'edit_post.html',
                     {'form': form, 'is_create': False})
+
+
+
+# def add_comment(request, slug, parent_id=None):
+#     post = get_object_or_404(Post, slug=slug)
+#     if request.method == "POST":
+#         form = CommentForm(request.POST)
+#         if form.is_valid():
+#             comment = form.save(commit=False)
+#             comment.post = post
+#             comment.author = request.user
+#             comment.parent_id = parent_id
+#             comment.save()
+#         return redirect('post_detail', slug=post.slug)
+#     else:
+#         form = CommentForm()
+#     return render(request, 'leave_comment.html', {'form': form})

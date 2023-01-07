@@ -73,6 +73,6 @@ def user_view(request, username):
             )
         context['username_form'] = form
 
-        posts = Post.objects.filter(author=profile)
-        context['posts'] = posts
+    posts = Post.objects.filter(author=profile)
+    context['posts'] = posts
     return render(request, 'user.html', context)

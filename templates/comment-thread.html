@@ -7,11 +7,11 @@
                 <span class="comment-footer-text"><i class="fa-solid fa-thumbs-up"></i> {{comment.number_of_likes}}</span>
                 <span class="comment-footer-text"><i class="fa-solid fa-thumbs-down"></i> {{comment.number_of_dislikes}}</span>
                 <span class="comment-footer-text">{{comment.created_on}}</span>
-                <a href="#">Add Reply</a>
+                <a href="#">Reply</a>
             </div>
              {% if comment.children.count > 0 %}
                 {% include "comment-thread.html" with comments=comment.children.all %}
             {% endif %}
         </div>
-    {% endfor %}
+    {% endfor %} 
 {% endblock %}
