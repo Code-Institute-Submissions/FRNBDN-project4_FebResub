@@ -1,8 +1,9 @@
-from django.shortcuts import render, get_object_or_404
-from .models import *
+from django.shortcuts import render, get_object_or_404, redirect
 from account.models import Account
 from django.forms import ModelForm
 from django.views import generic, View
+from django.http import HttpResponse
+from .models import *
 from .forms import PostForm, CommentForm
 
 
@@ -10,7 +11,7 @@ class Feed(generic.ListView):
     model = Post
     queryset = Post.objects.filter(listed=True).order_by('-created_on')
     template_name = 'index.html'
-    paginate_by = 5
+    paginate_by = 200
 
 
 class PostDetail(View):
@@ -72,9 +73,6 @@ class PostDetail(View):
 
 
 class CreatePost(View):
-    form_class = PostForm
-    template_name = 'edit_post.html'
-    success_url = 'create'
 
     def get(self, request, *args, **kwargs):
 
@@ -85,16 +83,17 @@ class CreatePost(View):
                 'form': PostForm(),
             }
         )
-
+    
     def post(self, request, *args, **kwargs):
 
-        form = PostForm(data=request.POST)
-
+        form = PostForm(request.POST, request.FILES)
+        
         if form.is_valid():
-            post = form.save(commit=False)
+            post = form.instance.save(commit=False)
             post.author = Account.objects.filter(
                     email=request.user.email).first()
             post.save()
+            form = PostForm()
         else:
             form = PostForm()
 
@@ -103,6 +102,6 @@ class CreatePost(View):
             'edit_post.html',
             {
                 'form': PostForm(),
-                'post': post,
             }
         )
+

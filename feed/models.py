@@ -15,7 +15,7 @@ class Post(models.Model):
     updated_on = models.DateField(auto_now=True)
     created_on = models.DateField(auto_now_add=True)
     body = models.TextField()
-    thumbnail = CloudinaryField('image', default='placeholder')
+    thumbnail = CloudinaryField('image')
     listed = models.BooleanField(default=True)
     likes = models.ManyToManyField(settings.AUTH_USER_MODEL,
                                    related_name='post_likes', blank=True)
@@ -42,8 +42,8 @@ class Post(models.Model):
 
 @receiver(post_delete, sender=Post)
 def submission_delete(sender, instance, **kwargs):
-    if not instance.image == 'placeholder':
-        instance.image.delete(False)
+    if not instance.thumbnail == 'placeholder':
+        instance.thumbnail.delete(False)
 
 
 class Comment(models.Model):

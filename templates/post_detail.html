@@ -3,11 +3,7 @@
 {% block content %}
 <div class="post-card">
     <div class="post-head" >
-        {% if 'placeholder' in post.thumbnail.url %}
-            <img class="" src="https://res.cloudinary.com/diso2qz9e/image/upload/v1671330251/cld-sample.jpg" alt="Placeholder Image: Woman With Dog Laughing">
-        {% else %}
             <img class="" src="{{post.thumbnail.url}}" alt="">
-        {% endif %}
             <h2 class="post-title">{{post.title}}</h2>
         </a>
         <div class="post-footer">
