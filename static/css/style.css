@@ -28,6 +28,10 @@ body{
     overflow: hidden;
 }
 
+img{
+    width: 100%;
+}
+
 .img-fluid{
     align-content: center;
 }

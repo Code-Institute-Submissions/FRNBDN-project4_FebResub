@@ -3,13 +3,14 @@ from django.conf import settings
 from cloudinary.models import CloudinaryField
 from django.db.models.signals import post_delete
 from django.dispatch import receiver
+from django.utils.text import slugify
 
 
 class Post(models.Model):
     title = models.CharField(max_length=100, unique=True)
     slug = models.SlugField(max_length=100, unique=True)
     author = models.ForeignKey(settings.AUTH_USER_MODEL,
-                               on_delete=models.PROTECT,
+                               on_delete=models.CASCADE,
                                related_name='feed_post')
     updated_on = models.DateField(auto_now=True)
     created_on = models.DateField(auto_now_add=True)
@@ -33,6 +34,11 @@ class Post(models.Model):
     def number_of_dislikes(self):
         return self.dislikes.count()
 
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        return super().save(*args, **kwargs)
+
 
 @receiver(post_delete, sender=Post)
 def submission_delete(sender, instance, **kwargs):
@@ -44,8 +50,9 @@ class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE,
                              related_name='comments')
     commenter = models.ForeignKey(settings.AUTH_USER_MODEL,
-                                  on_delete=models.CASCADE,
-                                  related_name='commenter')
+                                  on_delete=models.SET_NULL,
+                                  related_name='commenter',
+                                  null=True)
     body = models.TextField()
     created_on = models.DateField(auto_now_add=True)
     likes = models.ManyToManyField(settings.AUTH_USER_MODEL,
@@ -54,7 +61,7 @@ class Comment(models.Model):
                                       related_name='comment_dislikes',
                                       blank=True)
     parent = models.ForeignKey('self', blank=True, null=True,
-                               on_delete=models.PROTECT,
+                               on_delete=models.SET_NULL,
                                related_name='children')
 
     def __str__(self):

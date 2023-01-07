@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-{% load static %}
 
 {% block content %}
 
@@ -20,8 +19,9 @@
             </p>
         </div>
         {% endfor %}
-        <button type="submit"> Login</button>
+        <button type="submit" class="btn btn-primary"></button>> Login</button>
     </form>
+        <a href="{% url 'register' %}" class="btn btn-secondary"> Register </a>
 
 
 {%endblock%}

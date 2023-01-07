@@ -1,23 +1,22 @@
 {% extends "base.html" %}
-{% load static %}
 
 {% block content %}
  
 <div class="container">
     <div class="row">
         <div class="d-lg-none d-lg-none col-lg-7 offset-lg-1">
-            <a href="#">Create Post</a>
+            <a href="{% url 'create' %}">Create Post</a>
         </div>
 
         <div class="left-column col-lg-7 offset-lg-1 infinite-container">
-                {% for post in feed %}
+                {% for post in post_list %}
             <div class="post-container infinite-item">
                 {% if 'placeholder' in post.thumbnail.url %}
                     <img class="" src="https://res.cloudinary.com/diso2qz9e/image/upload/v1671330251/cld-sample.jpg" alt="Placeholder Image: Woman With Dog Laughing">
                 {% else %}
                     <img class="" src="{{post.thumbnail.url}}" alt="">
                 {% endif %}
-                <a href="#" class="post-link">
+                <a href="{% url 'post_detail' post.slug %}" class="post-link">
                     <h2 class="post-title">{{post.title}}</h2>
                 </a>
                 <div class="post-footer">
@@ -46,7 +45,7 @@
                 <p>exampl</p>
                 <p>exampl</p>
                 <p>exampl</p>
-                <a href="#">Create Post</a>
+                <a href="{% url 'create' %}">Create Post</a>
             </div>
         </div>
     </div>

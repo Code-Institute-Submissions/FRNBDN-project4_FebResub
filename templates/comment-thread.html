@@ -1,0 +1,17 @@
+{% block content %}
+    {% for comment in comments %}
+        <div class="comment-card">
+            <p>{{ comment.body|linebreaks }}</p>
+            <div class="comment-footer">
+                <span class="comment-footer-text">{{comment.commenter}}</span>
+                <span class="comment-footer-text"><i class="fa-solid fa-thumbs-up"></i> {{comment.number_of_likes}}</span>
+                <span class="comment-footer-text"><i class="fa-solid fa-thumbs-down"></i> {{comment.number_of_dislikes}}</span>
+                <span class="comment-footer-text">{{comment.created_on}}</span>
+                <a href="#">Add Reply</a>
+            </div>
+             {% if comment.children.count > 0 %}
+                {% include "comment-thread.html" with comments=comment.children.all %}
+            {% endif %}
+        </div>
+    {% endfor %}
+{% endblock %}

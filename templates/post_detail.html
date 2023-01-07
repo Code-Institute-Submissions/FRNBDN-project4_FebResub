@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="post-card">
+    <div class="post-head" >
+        {% if 'placeholder' in post.thumbnail.url %}
+            <img class="" src="https://res.cloudinary.com/diso2qz9e/image/upload/v1671330251/cld-sample.jpg" alt="Placeholder Image: Woman With Dog Laughing">
+        {% else %}
+            <img class="" src="{{post.thumbnail.url}}" alt="">
+        {% endif %}
+            <h2 class="post-title">{{post.title}}</h2>
+        </a>
+        <div class="post-footer">
+            <span class="card-footer-text">{{post.author}}</span>
+            <span class="card-footer-text"><i class="fa-solid fa-thumbs-up"></i> {{post.number_of_likes}}</span>
+            <span class="card-footer-text"><i class="fa-solid fa-thumbs-down"></i> {{post.number_of_dislikes}}</span>
+            <span class="card-footer-text">{{post.created_on}}</span>
+        </div>
+    </div>
+    <div class="post-body">
+        <p>{{ post.body|safe }}</p>
+   </div>
+</div>
+<div class="comment-section">
+    <div class="comments-head">
+        <p>Comments: </p>
+        {% with comments.count as total_comments %}
+        <p>{{ total_comments }}</p>
+        {% endwith %}
+    </div>
+    {% if post.comment_count > 0 %}
+        {% include "comment.html" with comments=post.children.all %}
+    {% else %}
+        <p>This post has no comments yet.</p>
+    {% endif %}
+</div>
+
+{% endblock %}

@@ -21,10 +21,10 @@ from django.contrib.auth import views as auth_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('summernote/', include('django_summernote.urls')),
-    path('', include('feed.urls'), name='blog_urls'),
     path('register/', user_reg_view, name='register'),
     path('logout/', logout_view, name='logout'),
     path('login/', login_view, name='login'),
+    path('', include('feed.urls'), name='feed_urls'),
     path('user/<username>', user_view, name='user'),
     path('password_change/done/', auth_views.PasswordChangeDoneView.as_view(
         template_name='account/password_change_done.html'),
