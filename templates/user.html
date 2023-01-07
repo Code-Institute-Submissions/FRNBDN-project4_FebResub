@@ -20,4 +20,14 @@
     {% else %}
         <h5>User: {{ request.user.username }}</h5>
     {% endif %}
+
+    {% for post in posts %}
+    <ul>
+        
+     <div><a href="{% url 'post_detail' post.slug %}">
+        Title {{post.title}}, Likes {{post.number_of_likes}}, Dislikes {{post.number_of_dislikes}}
+     </a></div>
+       
+    </ul>
+    {% endfor %}
 {% endblock %}

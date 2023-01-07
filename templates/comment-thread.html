@@ -3,7 +3,7 @@
         <div class="comment-card">
             <p>{{ comment.body|linebreaks }}</p>
             <div class="comment-footer">
-                <span class="comment-footer-text">{{comment.commenter}}</span>
+                <span class="comment-footer-text"><a href="{% url 'user' comment.commenter %}"></a>{{comment.commenter}}</span>
                 <span class="comment-footer-text"><i class="fa-solid fa-thumbs-up"></i> {{comment.number_of_likes}}</span>
                 <span class="comment-footer-text"><i class="fa-solid fa-thumbs-down"></i> {{comment.number_of_dislikes}}</span>
                 <span class="comment-footer-text">{{comment.created_on}}</span>

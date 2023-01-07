@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate, logout
 from account.forms import *
+from feed.models import Post
 
 
 # User Registration View
@@ -71,4 +72,7 @@ def user_view(request, username):
                 }
             )
         context['username_form'] = form
+
+        posts = Post.objects.filter(author=profile)
+        context['posts'] = posts
     return render(request, 'user.html', context)
