@@ -7,4 +7,5 @@ urlpatterns = [
     path('',  views.Feed.as_view(), name='home'),
     path('<slug:slug>/', views.PostDetail.as_view(), name='post_detail'),
     path('<slug:slug>/edit/', views.edit_post, name='edit'),
+    
 ]

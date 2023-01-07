@@ -11,7 +11,7 @@ class Feed(generic.ListView):
     model = Post
     queryset = Post.objects.filter(listed=True).order_by('-created_on')
     template_name = 'index.html'
-    paginate_by = 200
+    paginate_by = 10
 
 
 class PostDetail(View):
@@ -91,7 +91,7 @@ def edit_post(request, slug):
         return HttpResponse('You may only edit posts you have created.')
     else:
         if request.method == "POST":
-            form = PostForm(request.POST,request.FILES, instance=post)
+            form = PostForm(request.POST, request.FILES, instance=post)
             if form.is_valid():
                 post = form.save(commit=False)
                 post.save()
@@ -104,21 +104,4 @@ def edit_post(request, slug):
             }
             )
         return render(request, 'edit_post.html',
-                    {'form': form, 'is_create': False})
-
-
-
-# def add_comment(request, slug, parent_id=None):
-#     post = get_object_or_404(Post, slug=slug)
-#     if request.method == "POST":
-#         form = CommentForm(request.POST)
-#         if form.is_valid():
-#             comment = form.save(commit=False)
-#             comment.post = post
-#             comment.author = request.user
-#             comment.parent_id = parent_id
-#             comment.save()
-#         return redirect('post_detail', slug=post.slug)
-#     else:
-#         form = CommentForm()
-#     return render(request, 'leave_comment.html', {'form': form})
+                      {'form': form, 'is_create': False})
