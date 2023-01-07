@@ -105,3 +105,29 @@ class CreatePost(View):
             }
         )
 
+
+class UpdatePost(View):
+    def get(self, request, slug):
+        user = request.user
+        post = Post.objects.filter(slug=slug).all()
+
+        if post.author != user:
+            return HttpResponse("You can't edit posts you did not created!")
+        
+        if request.POST:
+            form = UpdatePost(request.POST, request.FILES)
+            if form.is_valid():
+                update = form.save(commit=False)
+                update.save()
+                success_msg = 'Updated sucessfully'
+                post = update
+        form = UpdatePost(
+            initial={
+                'title': post.title,
+                'body': post.body,
+                'thumbnail': post.thumbnail
+            }
+        )
+        return render(request, 'edit_post.html', {
+            'form': form,
+        })
