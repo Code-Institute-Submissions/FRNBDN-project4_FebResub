@@ -9,8 +9,33 @@
         </a>
         <div class="post-footer">
             <a href="{% url 'user' post.author.username %}" class="card-footer-text">{{post.author.username}}</a>
-            <span class="card-footer-text"><i class="fa-solid fa-thumbs-up"></i> {{post.number_of_likes}}</span>
-            <span class="card-footer-text"><i class="fa-solid fa-thumbs-down"></i> {{post.number_of_dislikes}}</span>
+
+            {% if user.is_authenticated %}
+            <form class="d-inline" action="{% url 'post_like' post.slug %}" method="POST">
+                {% csrf_token %}
+                    {% if liked %}
+                    <button type="submit" name="blogpost_id" value="{{post.slug}}" class="btn-like"><i class="fa-solid fa-thumbs-up"></i></button>
+                    {% else %}
+                    <button type="submit" name="blogpost_id" value="{{post.slug}}" class="btn-like"><i class="fa-regular fa-thumbs-up"></i></button>
+                    {% endif %}
+            </form>
+            {% else %}
+                <span class="text-secondary"><i class="fa-regular fa-thumbs-up"></i></span>
+            {% endif %}
+            <span class="card-footer-text"> {{post.number_of_likes}}</span>
+            {% if user.is_authenticated %}
+            <form class="d-inline" action="{% url 'post_dislike' post.slug %}" method="POST">
+                {% csrf_token %}
+                    {% if disliked %}
+                    <button type="submit" name="post_id" value="{{post.slug}}" class="btn-dislike"><i class="fa-solid fa-thumbs-down"></i></button>
+                    {% else %}
+                    <button type="submit" name="post_id" value="{{post.slug}}" class="btn-dislike"><i class="fa-regular fa-thumbs-down"></i></button>
+                    {% endif %}
+            </form>
+            {% else %}
+                <span class="text-secondary"><i class="fa-regular fa-thumbs-down"></i></span>
+            {% endif %}
+            <span class="card-footer-text">{{post.number_of_dislikes}}</span>
             <span class="card-footer-text">{{post.created_on}}</span>
             {% if post.author == request.user %}
             <a class="card-footer-text" href="{% url 'edit' post.slug %}"> Edit </a>

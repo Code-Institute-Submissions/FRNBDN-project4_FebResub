@@ -7,5 +7,7 @@ urlpatterns = [
     path('',  views.Feed.as_view(), name='home'),
     path('<slug:slug>/', views.PostDetail.as_view(), name='post_detail'),
     path('<slug:slug>/edit/', views.edit_post, name='edit'),
-    
+    path('like/<slug:slug>', views.PostLike.as_view(), name='post_like'),
+    path('dislike/<slug:slug>',
+         views.PostDislike.as_view(), name='post_dislike'),
 ]
