@@ -43,6 +43,7 @@ if DEBUG:
 # Application definition
 
 INSTALLED_APPS = [
+    'account',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -54,7 +55,7 @@ INSTALLED_APPS = [
     'django_summernote',
     'crispy_forms',
     'feed',
-    'account'
+    
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
