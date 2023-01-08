@@ -1,26 +1,22 @@
 {% extends "base.html" %}
-
+{% load crispy_forms_tags %}
 {% block content %}
 
-    <h1>Register</h1>
-    <form method="post" >
-        {% csrf_token %}
-        {% for field in user_reg_form %}
-        <div>
-            <p>
-                {{field.label_tag}}
-                {{field}}
-
-                {% for error in field.errors %}
-                    <p>{{error}}</p>
-                {% endfor %}
-                
-            </p>
+        <div class="container">
+            <div class="row">
+        
+                <div class="left-column col-lg-7 offset-lg-1 infinite-container">
+                    
+                    <div class="post-container card flex-column p-4">
+                        <h1>Register</h1>
+                        <form method="post" >
+                            {% csrf_token %}
+                            {{ user_reg_form | crispy }}
+                            <button type="submit" class="btn btn-primary w-100">Register</button> </button>
+                        </form>
+                            <a href="{% url 'login' %}" class="btn btn-link"> Already registered an account? </a>
+                    </div>
+                </div>
+            </div>
         </div>
-        {% endfor %}
-        <button type="submit" class="btn btn-primary"></button>> Register</button>
-    </form>
-        <a href="{% url 'login' %}" class="btn btn-secondary"></a>> Login </a>
-
-
 {%endblock%}

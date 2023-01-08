@@ -6,7 +6,7 @@
 <html lang="en">
 
 <head>
-    <title>Allshapes PT</title>
+    <title>Blogrum</title>
 
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,57 +16,57 @@
     <script src="https://kit.fontawesome.com/f4cdc29b9e.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicon/apple-touch-icon.png' }">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon/favicon-32x32.png' }">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon/favicon-16x16.png' }">
+    <link rel="manifest" href="{% static 'favicon/site.webmanifest'}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    
 </head>
-
-<body class="d-flex flex-column">
-    <header>
-        <nav class="darker-blue navbar navbar-expand-lg">
-            <a class="navbar-brand" href="{% url 'home' %}"><span class="logo-font">BLOGRUM</span></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <i class="fa-sharp fa-solid fa-bars hamburger"></i>
-            </button>
-          
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                  <a class="nav-link" href="#"></a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#"></a>
-                </li>
-                {% if user.is_authenticated %}
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {{request.user.username}}
-                  </a>
-                  <div class="dropdown-menu darker-blue" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">View Booked Times</a>
-                    <a class="dropdown-item" href="{% url 'user' user.username %}">Update Info</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
-                  </div>
-                </li>
-                {% else %}
-                <li class="nav-item active">
-                  <a class="nav-link" href="{% url 'login' %}">Login</a>
-                </li>
-                <li class="nav-item active">
-                  <a class="nav-link" href="{% url 'register' %}">Register</a>
-                </li>
-                {% endif %}
-              </ul>
-            </div>
-          </nav>
-    </header>
-
+  <nav class="navbar">
+    <div class="container-fluid flex-nowrap">
+      <a class="navbar-brand d-sm-block d-none" href="{% url 'home' %}"><span class="logo-font">BLOGRUM</span></a>
+      <a class="navbar-brand d-block d-sm-none " href="{% url 'home' %}"><span class="logo-font">B</span></a>
+      <form class="d-flex input-group w-auto">
+        <input
+          type="search"
+          class="form-control rounded"
+          placeholder="Search"
+          aria-label="Search"
+          aria-describedby="search-addon"
+        />
+        <span class="input-group-text border-0" id="search-addon">
+          <i class="fas fa-search"></i>
+        </span>
+      </form>
+    </div>
+  </nav>
+  <div class="sidebar-item sticky-top d-lg-flex d-none">
+    <div class="sidebar card flex-column">
+      {% if user.is_authenticated%}
+      <p ><a href="{% url 'user' user.username %}">Profile</a><a href="#"><i class="fa-solid fa-gear"></i></a></p>
+      <p>Activity History:</p>
+      <p> <span><i class="fa-solid fa-envelopes-bulk"></i>: 0</span> <span><i class="fa-regular fa-message"></i>: 0</span></p>
+      <p><span><i class="fa-solid fa-thumbs-up"></i>: 0</span><span> <i class="fa-solid fa-thumbs-down"></i>: 0</span></p>
+      <p><a href="{% url 'logout' %}">Logout</a></p>
+      {%else%}
+      <p><a href="{% url 'login' %}">Login</a></p>
+      <p><a href="{% url 'register' %}">Register</a></p>
+      {%endif%}
+      
+      {% if user.is_admin %}
+      <p><a href="{% url 'admin:index' %}">Admin Page</a></p>
+      {% endif %}
+      <p><a class="btn btn-primary" href="{% url 'create' %}">Create Post <i class="fa-regular fa-envelope"></i></a></p>
+  </div>
+  </div>
     <main class="min-vh-100">
         {% block content %}
 
         {% endblock content %}
     </main>
       <footer class="sticky-bottom">
-        <div class="footer darker-blue pt-3">
+        <div class="footer pt-3">
           <div class="container">
             <div class="row">
               <div class="col-md-4 col-lg-4">

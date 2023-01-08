@@ -126,3 +126,39 @@ class PostDislike(View):
             post.dislikes.add(request.user)
 
         return redirect('post_detail', slug=slug)
+
+
+class CommentLike(View):
+
+    def post(self, request, slug):
+        post = get_object_or_404(Post, slug=slug)
+        comment = get_object_or_404(Comment, id=self.id)
+
+        if comment.likes.filter(
+            id=request.user.id).exists(
+            ) or comment.dislikes.filter(
+                id=request.user.id).exists():
+            comment.likes.remove(request.user)
+            comment.dislikes.remove(request.user)
+        else:
+            comment.likes.add(request.user)
+
+        return redirect('post_detail', slug=slug)
+
+
+class CommentDislike(View):
+    
+    def post(self, request, slug):
+        post = get_object_or_404(Post, slug=slug)
+        comment = get_object_or_404(Comment, id=self.id)
+
+        if comment.likes.filter(
+            id=request.user.id).exists(
+            ) or comment.dislikes.filter(
+                id=request.user.id).exists():
+            comment.likes.remove(request.user)
+            comment.dislikes.remove(request.user)
+        else:
+            comment.dislikes.add(request.user)
+
+        return redirect('post_detail', slug=slug)

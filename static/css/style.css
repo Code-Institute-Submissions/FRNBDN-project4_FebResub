@@ -1,7 +1,7 @@
 body{
-    background-color: #00336a;
+    background-color: #E8F2FC;
     font-family: 'Roboto', sans-serif;
-    color: #007bff;
+    color: #55AAFF;
 
     min-height: 100vh;
     
@@ -15,17 +15,17 @@ body{
     letter-spacing: 2px;
 }
 
-.darker-blue{
-    background-color: rgb(28, 34, 53);
+.logo-large{
+
 }
 
-.box-shadow-bottom{
-    box-shadow: -12px 17px 0px 0px #000000;
+.navbar{
+    background-color: #55AAFF;
+    color: #ffffff;
 }
 
-.carousel {
-    height: 30vh;
-    overflow: hidden;
+.navbar a{
+    color: #ffffff;
 }
 
 img{
@@ -40,18 +40,40 @@ img{
     font-size: smaller;
 }
 
-.fa-brands:hover{
-    color: #00b8ff;
-}
-
-.dropdown-menu a{
-    color: #007bff;
-}
-
-.dropdown-divider{
-    border-color: #007bff;
-}
-
 .hamburger{
-    color: #007bff;
+    color: #ffffff;
+}
+
+.card-title {
+    font-weight: bold;
+}
+
+.card {
+    flex-direction: row;
+    align-items: center;
+    border-radius: 1rem;
+    border: none;
+    margin: 3vh 0;
+}
+
+.card-img-container{
+    width: 30%;
+    border-left: .5rem;
+}
+
+.card img {
+    width: 100%;
+    border-radius: .5rem 0 0 .5rem ;
+}   
+
+.sticky-top {
+    position:fixed;
+    max-width: 25%;
+    display: inline;
+    right: 5%;
+    top: 62px;
+  }
+
+.sticky-top>div{
+    padding: 1vh 2vh 0 2vh;
 }

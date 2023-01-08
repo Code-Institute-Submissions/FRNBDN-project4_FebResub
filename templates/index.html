@@ -10,21 +10,30 @@
 
         <div class="left-column col-lg-7 offset-lg-1 infinite-container">
                 {% for post in post_list %}
-            <div class="post-container infinite-item">
-                
-                <img class="" src="{{post.thumbnail.url}}" alt="">
-               
-                <a href="{% url 'post_detail' post.slug %}" class="post-link">
-                    <h2 class="post-title">{{post.title}}</h2>
-                </a>
-                <div class="post-footer">
-                    <a href="{% url 'user' post.author.username %}" class="card-footer-text">{{post.author.username}}</a>
-                    <span class="card-footer-text"><i class="fa-solid fa-thumbs-up"></i> {{post.number_of_likes}}</span>
-                    <span class="card-footer-text"><i class="fa-solid fa-thumbs-down"></i> {{post.number_of_dislikes}}</span>
-                    <span class="card-footer-text">{{post.created_on}}</span>
-                    {% if post.author == request.user %}
-                    <a class="card-footer-text" href="{% url 'edit' post.slug %}"> Edit </a>
-                    {% endif %}
+            <div class="post-container card infinite-item">
+                <div class="card-img-container">
+                    <a href="{% url 'post_detail' post.slug %}">
+                    {% if "placeholder" in post.thumbnail.url or null in post.thumbnail.url %}
+                        
+                        <img class="card-img-top" src="https://res.cloudinary.com/diso2qz9e/image/upload/v1673164744/asdasd_fylhia.jpg" alt="">
+                        {% else %}
+                    <img class="card-img-top" src="{{post.thumbnail.url}}" alt="">
+                        {% endif %}
+                    </a>
+                </div>
+               <div class="card-body pl-1">
+                    <a href="{% url 'post_detail' post.slug %}" class="post-link">
+                        <h2 class="card-title">{{post.title}}</h2>
+                    </a>
+                    <div class="bottom">
+                        <a href="{% url 'user' post.author.username %}" class="card-footer-text">{{post.author.username}}</a>
+                        <span class="card-footer-text"><i class="fa-solid fa-thumbs-up"></i> {{post.number_of_likes}}</span>
+                        <span class="card-footer-text"><i class="fa-solid fa-thumbs-down"></i> {{post.number_of_dislikes}}</span>
+                        <span class="card-footer-text">{{post.created_on}}</span>
+                        {% if post.author == request.user %}
+                        <a class="card-footer-text" href="{% url 'edit' post.slug %}"> Edit </a>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
                 {% endfor %}
@@ -41,16 +50,6 @@
                     </ul>
                 </nav>
                 {% endif %}
-        </div>
-
-        <div class="right-column col-lg-3 d-lg-flex d-none flex-column">
-            <div class="sidebar">
-                <p>exampl</p>
-                <p>exampl</p>
-                <p>exampl</p>
-                <p>exampl</p>
-                <a href="{% url 'create' %}">Create Post</a>
-            </div>
         </div>
     </div>
 </div>

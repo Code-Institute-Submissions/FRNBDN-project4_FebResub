@@ -3,10 +3,31 @@
         <div class="comment-card">
             <p>{{ comment.body|linebreaks }}</p>
             <div class="comment-footer">
-                <span class="comment-footer-text"><a href="{% url 'user' comment.commenter %}"></a>{{comment.commenter}}</span>
-                <span class="comment-footer-text"><i class="fa-solid fa-thumbs-up"></i> {{comment.number_of_likes}}</span>
-                <span class="comment-footer-text"><i class="fa-solid fa-thumbs-down"></i> {{comment.number_of_dislikes}}</span>
+                <span class="comment-footer-text"><a href="{% url 'user' comment.commenter %}"></a>{{comment.commenter.username}}</span>
+                
                 <span class="comment-footer-text">{{comment.created_on}}</span>
+                <!-- {% if user.is_authenticated %}
+                    <form class="d-inline" action="{% url 'post_detail' post.slug %}" method="POST">
+                        {% csrf_token %}
+                        {% if comment.liked %}
+                            <button type="submit" name="comment_id" value="{{comment.id}}" class="btn-like"><i class="fa-solid fa-thumbs-up"></i> {{comment.number_of_likes}}</button>
+                        {% else %}
+                            <button type="submit" name="comment_id" value="{{post.slug}}" class="btn-like"><i class="fa-regular fa-thumbs-up"></i> {{comment.number_of_likes}}</button>
+                        {% endif %}
+                    </form>
+                    <form class="d-inline" action="{% url 'post_detail' post.slug %}" method="POST">
+                        {% csrf_token %}
+                        {% if comment.disliked %}
+                            <button type="submit" name="comment_id" value="{{comment.id}}" class="btn-dislike"><i class="fa-solid fa-thumbs-down"></i>{{comment.number_of_dislikes}}</button>
+                        {% else %}
+                            <button type="submit" name="comment_id" value="{{comment.id}}" class="btn-dislike"><i class="fa-regular fa-thumbs-down"></i>{{comment.number_of_dislikes}}</button>
+                        {% endif %}
+                    </form>
+                {% else %}
+                    <span class="comment-footer-text"><i class="fa-regular fa-thumbs-up"></i> {{comment.number_of_likes}}</span>
+                    <span class="comment-footer-text"><i class="fa-regular fa-thumbs-down"></i> {{comment.number_of_dislikes}}</span>
+                {% endif %}
+                <span class="comment-footer-text">{{comment.created_on}}</span> -->
                 {% if user.is_authenticated %}
                     <form action="" method="POST" id="main_form" class="comment_form">
                         <div>

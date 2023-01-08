@@ -15,7 +15,7 @@ class Post(models.Model):
     updated_on = models.DateField(auto_now=True)
     created_on = models.DateField(auto_now_add=True)
     body = models.TextField()
-    thumbnail = CloudinaryField('image')
+    thumbnail = CloudinaryField('image', default='placeholder')
     listed = models.BooleanField(default=True)
     likes = models.ManyToManyField(settings.AUTH_USER_MODEL,
                                    related_name='post_likes', blank=True)
@@ -75,7 +75,7 @@ class Comment(models.Model):
 
     def number_of_dislikes(self):
         return self.dislikes.count()
-        
+
     @property
     def children(self):
         return Comment.objects.filter(parent=self).reverse()
