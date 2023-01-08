@@ -2,9 +2,6 @@ body{
     background-color: #E8F2FC;
     font-family: 'Roboto', sans-serif;
     color: #55AAFF;
-
-    min-height: 100vh;
-    
     display: flex;
     flex-direction: column;
 }
@@ -13,10 +10,6 @@ body{
     font-family: 'Permanent Marker', cursive;
     font-size: larger;
     letter-spacing: 2px;
-}
-
-.logo-large{
-
 }
 
 .navbar{

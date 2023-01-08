@@ -59,20 +59,25 @@ def user_view(request, username):
     
     profile = get_object_or_404(Account, username=username)
     context['profile'] = profile
-    
-    if profile == request.user:
-        if request.POST:
-            form = UpdateUsernameForm(request.POST, instance=request.user)
-            if form.is_valid():
-                form.save()
-        else:
-            form = UpdateUsernameForm(
-                initial={
-                    'username': request.user.username,
-                }
-            )
-        context['username_form'] = form
-
     posts = Post.objects.filter(author=profile)
     context['posts'] = posts
     return render(request, 'user.html', context)
+
+
+def account_view(request):
+    context = {}
+    if request.POST:
+        form = UpdateUsernameForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.initial = {
+                'username': request.POST['username'],
+                }  
+        form.save()
+        context['success_message'] = 'Updated!'
+    else:
+        form = UpdateUsernameForm(
+            initial={
+                'username': request.user.username,
+            })       
+    context['username_form'] = form
+    return render(request, 'account.html', context)
