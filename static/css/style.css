@@ -77,3 +77,8 @@ img{
 .sticky-top>div{
     padding: 1vh 2vh 0 2vh;
 }
+
+.footer{
+    background-color: #55AAFF;
+    color: #ffffff;
+}

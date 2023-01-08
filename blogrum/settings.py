@@ -44,6 +44,7 @@ if DEBUG:
 
 INSTALLED_APPS = [
     'account',
+    'feed',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -54,7 +55,6 @@ INSTALLED_APPS = [
     'cloudinary',
     'django_summernote',
     'crispy_forms',
-    'feed',
     
 ]
 
