@@ -7,7 +7,16 @@
                 <span class="comment-footer-text"><i class="fa-solid fa-thumbs-up"></i> {{comment.number_of_likes}}</span>
                 <span class="comment-footer-text"><i class="fa-solid fa-thumbs-down"></i> {{comment.number_of_dislikes}}</span>
                 <span class="comment-footer-text">{{comment.created_on}}</span>
-                <a href="#">Reply</a>
+                {% if user.is_authenticated %}
+                    <form action="" method="POST" id="main_form" class="comment_form">
+                        <div>
+                            <p>Leave a reply:</p>
+                            <input type="text" name="body"> 
+                            <input type="hidden" value="{{ comment.pk }}" name="parent"> {% csrf_token %} 
+                            <input type="submit" value="Post"></div>
+                        </div>
+                    </form>
+                 {% endif %}
             </div>
              {% if comment.children.count > 0 %}
                 {% include "comment-thread.html" with comments=comment.children.all %}

@@ -36,12 +36,16 @@
 </div>
 <div>
     {% if user.is_authenticated %}
-    <p>Leave a comment as: <a href="{% url 'user' user.username %}" class="card-footer-text">{{user.username}}</a></p>
-    <form method="post">
-        {{ comment_form | crispy }}
-        {% csrf_token %}
-        <button type="submit" class="btn btn-signup btn-lg">Submit</button>
-    </form>
+        <p>Leave a comment as: <a href="{% url 'user' user.username %}" class="card-footer-text">{{user.username}}</a></p>
+        <form method="post" id="main_form" class="comment_form">
+            <div>
+                {{ comment_form.body | as_crispy_field }}
+                {% csrf_token %}
+                <button type="submit" class="btn btn-signup btn-lg", value="Post">Submit</button>
+            </div>
+        </form>
+    {% else %} 
+        <h2>Log in to leave a comment</h2> 
     {% endif %}
 </div>
 {% endwith %}

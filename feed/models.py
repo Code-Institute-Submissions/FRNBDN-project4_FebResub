@@ -75,3 +75,13 @@ class Comment(models.Model):
 
     def number_of_dislikes(self):
         return self.dislikes.count()
+        
+    @property
+    def children(self):
+        return Comment.objects.filter(parent=self).reverse()
+
+    @property
+    def is_parent(self):
+        if self.parent is None:
+            return True
+        return False
