@@ -45,13 +45,10 @@
         <div class="sidebar card flex-column">
           {% if user.is_authenticated%}
             <p>Logged in as:</p>
-           <h4 class="mt-0 pt-0">{{user.username}}</h4>
-            <p><a href="{% url 'account' %}"></span>Account Settings <i class="fa-solid fa-gear "></i></a></p>
-            <a href="{% url 'user' user.username %}">
-              <p>Activity History:</a></p>
-              <p> <span><i class="fa-solid fa-envelopes-bulk"></i>: 0</span> <span><i class="fa-regular fa-message"></i>: 0</span></p>
-              <p><span><i class="fa-solid fa-thumbs-up"></i>: 0</span><span> <i class="fa-solid fa-thumbs-down"></i>: 0</span></p>
-            </a>
+           <h4 class="mt-0 pt-0"><a href="{% url 'user' user.username %}">{{user.username}}</a></h4>
+              <p>Activity History:</p>
+              <p> <span><i class="fa-solid fa-envelopes-bulk"></i>:{{user.number_of_posts}}</span> <span><i class="fa-regular fa-message"></i>: {{user.number_of_comments}}</span></p>
+              <p><span><i class="fa-solid fa-thumbs-up"></i>: {{user.number_of_likes}}</span><span> <i class="fa-solid fa-thumbs-down"></i>: {{user.number_of_dislikes}}</span></p>
             <p><a href="{% url 'logout' %}">Logout</a></p>
           {%else%}
             <p><a href="{% url 'login' %}">Login</a></p>

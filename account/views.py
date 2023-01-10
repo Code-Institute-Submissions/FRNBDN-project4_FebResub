@@ -61,11 +61,7 @@ def user_view(request, username):
     context['profile'] = profile
     posts = Post.objects.filter(author=profile)
     context['posts'] = posts
-    return render(request, 'user.html', context)
 
-
-def account_view(request):
-    context = {}
     if request.POST:
         form = UpdateUsernameForm(request.POST, instance=request.user)
         if form.is_valid():
@@ -80,4 +76,4 @@ def account_view(request):
                 'username': request.user.username,
             })       
     context['username_form'] = form
-    return render(request, 'account.html', context)
+    return render(request, 'user.html', context)

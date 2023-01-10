@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from feed.models import *
 
 
 class MyAccountManager(BaseUserManager):
@@ -57,4 +58,25 @@ class Account(AbstractBaseUser):
 
     def has_module_perms(self, app_Label):
         return True
-    
+
+    def number_of_posts(self):
+        return Post.objects.filter(author=self).count()
+
+    def number_of_comments(self):
+        return Comment.objects.filter(commenter=self).count()
+
+    def number_of_likes(self):
+        queryset = Post.objects.filter(listed=True)
+        count = 0
+        for post in queryset:
+            if post.likes.filter(id=self.id).exists():
+                count = count+1
+        return count
+
+    def number_of_dislikes(self):
+        queryset = Post.objects.filter(listed=True)
+        count = 0
+        for post in queryset:
+            if post.dislikes.filter(id=self.id).exists():
+                count = count+1
+        return count

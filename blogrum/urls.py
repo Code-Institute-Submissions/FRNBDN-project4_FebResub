@@ -19,7 +19,6 @@ from account.views import *
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
-    path('account/', account_view, name='account'),
     path('password_reset/', auth_views.PasswordResetView.as_view(template_name='password_reset_form.html'), name='password_reset'),
     path('password_change/', auth_views.PasswordChangeView.as_view(
         template_name='password_change.html'), name='password_change'),
