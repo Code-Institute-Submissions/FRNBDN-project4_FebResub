@@ -149,7 +149,7 @@ class CommentLike(View):
 
 
 class CommentDislike(View):
-    
+
     def post(self, request, slug):
         post = get_object_or_404(Post, slug=slug)
         comment = get_object_or_404(Comment, id=self.id)

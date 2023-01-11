@@ -75,3 +75,31 @@ img{
     background-color: #55AAFF;
     color: #ffffff;
 }
+
+.btn-right{
+    border-radius: 0% 50% 50% 0%;
+}
+
+.btn-left{
+    border-radius: 50% 0% 0% 50%;
+}
+
+.post-body{
+    width: 100%;
+}
+
+.divider{
+    height: 1px;
+    width: 70%;
+    background: #55aaff4a;
+}
+
+#id_body{
+    height: 10vh;
+}
+
+.comment{
+    color: #55aaff;
+    background-color: #ffffff57;
+    padding: 10px;
+}
