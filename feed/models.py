@@ -43,12 +43,6 @@ class Post(models.Model):
         return super().save(*args, **kwargs)
 
 
-@receiver(post_delete, sender=Post)
-def submission_delete(sender, instance, **kwargs):
-    if not instance.thumbnail == 'placeholder':
-        instance.thumbnail.delete(False)
-
-
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE,
                              related_name='comments')

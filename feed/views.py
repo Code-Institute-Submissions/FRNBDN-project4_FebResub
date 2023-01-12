@@ -20,7 +20,7 @@ class PostDetail(View):
         post = get_object_or_404(queryset, slug=slug)
         comments = Comment.objects.filter(post=post).order_by('-created_on')   
         liked = False
-        disliked = True
+        disliked = False
         if post.likes.filter(id=self.request.user.id).exists():
             liked = True
         if post.dislikes.filter(id=self.request.user.id).exists():
@@ -76,22 +76,22 @@ def edit_post(request, slug):
     post = get_object_or_404(Post, slug=slug)
     if post.author != request.user:
         return HttpResponse('You may only edit posts you have created.')
-    else:
-        if request.method == "POST":
-            form = PostForm(request.POST, request.FILES, instance=post)
-            if form.is_valid():
-                post = form.save(commit=False)
-                post.save()
-            return redirect('post_detail', slug=post.slug)
-        else:
-            form = PostForm(instance=post, initial={
-                'title': post.title,
-                'body': post.body,
-                'thumbnail': post.thumbnail,
-            }
-            )
-        return render(request, 'edit_post.html',
-                      {'form': form, 'is_create': False})
+
+    if request.method == "POST":
+        form = PostForm(request.POST, request.FILES, instance=post)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.save()
+        return redirect('post_detail', slug=post.slug)
+
+    form = PostForm(instance=post, initial={
+        'title': post.title,
+        'body': post.body,
+        'thumbnail': post.thumbnail,
+    }
+    )
+    return render(request, 'edit_post.html',
+                  {'form': form, 'is_create': False})
 
 
 class PostLike(View):
