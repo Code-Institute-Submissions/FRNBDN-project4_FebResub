@@ -163,3 +163,9 @@ class CommentDislike(View):
         else:
             comment.dislikes.add(request.user)
         return redirect('post_detail', slug=slug)
+
+
+class PostDeleteView(generic.DeleteView):
+    model = Post
+    success_url = "/"
+    template_name = "post_confirm_delete.html"

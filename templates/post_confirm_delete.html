@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+
+  <div class="container">
+    <div class="row">
+        <div class="left-column col-lg-7 offset-lg-1 infinite-container">
+          <div class="post-container card flex-column p-4">
+            {% if user.is_authenticated %}
+            <form method="POST">{% csrf_token %}
+              <h1>Confirm Delete Post</h1>
+              <p>Are you sure you want to delete the post?</p>
+              <button class="btn btn-warnding w-100" type="submit">Delete Post</button>  
+            </form>
+            {% else %}
+            
+            <div class="card d-flex flex-column">
+                <p>You have to be logged in to post! </p>
+                <div>
+                    <a href="{% url 'login' %}" class="btn btn-primary"> Login </a>
+                    <a href="{% url 'register' %}" class="btn btn-primary"> Register </a>
+                </div>
+            </div>
+            {% endif %}
+              
+              
+
+        </div>
+    </div>
+  </div>
+
+
+{% endblock %}

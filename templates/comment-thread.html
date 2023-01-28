@@ -2,7 +2,7 @@
         
 {% for comment in comments %}
 
-<div class="comment border-left  border-primary offset-1 {% if forloop.first %} rounded-top {%endif%} {% if forloop.last %} border-bottom rounded-bottom {%endif%} ">
+<div class="comment border-left border-primary {% if forloop.first %}{%else%}offset-1{%endif%}{% if forloop.first %} rounded-top offset-0 {%endif%}{% if forloop.last %} border-bottom rounded-bottom {%endif%} ">
 
     <div class="comment-info"> <strong>{{ comment.commenter.username}}</strong> on {{ comment.created_on }}</div>
     <p>{{ comment.body|linebreaks }}</p>

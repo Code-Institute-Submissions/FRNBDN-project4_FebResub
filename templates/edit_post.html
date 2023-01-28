@@ -21,15 +21,20 @@
                     {% csrf_token %}
                   
                     {{ form | crispy }}
-                    
-                <button class="btn btn-primary" type="submit" value="Upload"> 
-                    {% if create %}
-                        Create Post
-                    {% else %}
-                        Save Changes
-                    {% endif %}
-                </button>
+                    <div>
+                    <button class="btn btn-primary" type="submit" value="Upload"> 
+                        {% if create %}
+                            Create Post
+                        </button>
+                        </div>
+                        {% else %}
+                            Save Changes
+                        </button>
+                        
+                        </div>
+                        {% endif %}
                 </form>
+                
                 {% else %}
                 
                 <div class="card d-flex flex-column">
