@@ -103,3 +103,19 @@ img{
     background-color: #d2d5d917;
     padding: 10px;
 }
+
+.delete-comment{
+    background: none;
+    border: none;
+    font-size: smaller;
+}
+
+.setting-strip{
+    background-color: #55AAFF;
+    color: white;
+}
+
+.setting-strip a{
+    color: white;
+    font-style: italic;
+}

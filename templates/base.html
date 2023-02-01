@@ -64,6 +64,34 @@
         </div>
       </div>
     <main class="min-vh-100 d-block">
+   
+      <div class="mobile-menu d-lg-none">
+        <div class="setting-strip text-center sticky">
+        {% if user.is_authenticated%}
+           <p class="text-center"><a href="{% url 'user' user.username %}"><i class="fa-solid fa-user"></i> {{user.username}}: </a>
+            <span><i class="fa-solid fa-envelopes-bulk"></i>:{{user.number_of_posts}}</span> 
+            <span><i class="fa-regular fa-message"></i>: {{user.number_of_comments}}</span>
+            <span><i class="fa-solid fa-thumbs-up"></i>: {{user.number_of_likes}}</span>
+            <span><i class="fa-solid fa-thumbs-down"></i>: {{user.number_of_dislikes}}</span>
+          </p>
+              <p class="text-center"> 
+                <span><a class="btn btn-primary mb-1" href="{% url 'logout' %}">Logout <i class="fa-solid fa-right-from-bracket"></i></a></span>
+          {%else%}
+                <a class="btn btn-primary mb-1" href="{% url 'login' %}">Login <i class="fa-solid fa-right-to-bracket"></i></a>
+                <a class="btn btn-primary mb-1" href="{% url 'register' %}">Register <i class="fa-solid fa-user-plus"></i></a>
+          {%endif%}
+              
+      
+          {% if user.is_admin %}
+            <a class="btn btn-primary mb-1" href="{% url 'admin:index' %}">Admin Page <i class="fa-solid fa-user-gear"></i></a>
+          
+          {% endif %}
+          <a class="btn btn-primary mb-1" href="{% url 'create' %}">Create Post <i class="fa-regular fa-envelope"></i></a>
+          </p>
+        </div>
+      </div>
+    </div>
+  
         {% block content %}
 
         {% endblock content %}

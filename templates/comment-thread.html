@@ -7,18 +7,26 @@
     <div class="comment-info"> <strong>{{ comment.commenter.username}}</strong> on {{ comment.created_on }}</div>
     <p>{{ comment.body|linebreaks }}</p>
     {% if user.is_authenticated %}
-    <a class="text-muted font-italic smaller" data-toggle="collapse" href="#reply{{forloop.counter}}comment{{comment.pk}}" role="button" aria-expanded="false" aria-controls="collapse reply{{forloop.counter}}">
-        reply
+    <div>
+      <a class="text-muted font-italic smaller" data-toggle="collapse" 
+      href="#reply{{forloop.counter}}comment{{comment.pk}}" role="button" 
+      aria-expanded="false" aria-controls="collapse reply{{forloop.counter}}">
+      Reply
       </a>
+      {% if comment.commenter == request.user %}
+      <a class="font-italic text-danger smaller" href="{% url 'comment_delete' comment.pk %}"> Delete </a>
+    </div>
+      {% endif %}
       <div class="collapse" id="reply{{forloop.counter}}comment{{comment.pk}}">
         <div class="card card-body">
-            <form action="" method="POST" id="main_form" class="comment_form">
-                <input type="text" name="body"> 
+            <form action="" method="POST" id="main_form" class="comment_form  w-100 d-flex">
+                <input type="text" name="body" class="form-control mr-1" placeholder="Type your reply here"> 
                 <input type="hidden" value="{{ comment.pk }}" name="parent"> {% csrf_token %} 
                 <input class="btn btn-primary" type="submit" value="Submit">
           </form>
         </div>
       </div>
+    </div>
     
 {% endif %}
     {% if comment.children.count > 0 %}

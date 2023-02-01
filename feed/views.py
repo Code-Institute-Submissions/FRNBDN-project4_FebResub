@@ -150,7 +150,7 @@ class CommentLike(View):
 
 class CommentDislike(View):
 
-    def post(self, request, slug):
+    def post(request, slug):
         post = get_object_or_404(Post, slug=slug)
         comment = get_object_or_404(Comment, id=self.id)
 
@@ -169,3 +169,10 @@ class PostDeleteView(generic.DeleteView):
     model = Post
     success_url = "/"
     template_name = "post_confirm_delete.html"
+
+
+class CommentDeleteView(generic.DeleteView):
+    model = Comment
+    success_url = "/"
+    template_name = "comment_confirm_delete.html"
+

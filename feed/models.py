@@ -47,7 +47,7 @@ class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE,
                              related_name='comments')
     commenter = models.ForeignKey(settings.AUTH_USER_MODEL,
-                                  on_delete=models.SET_NULL,
+                                  on_delete=models.CASCADE,
                                   related_name='commenter',
                                   null=True)
     body = models.TextField()
@@ -58,7 +58,7 @@ class Comment(models.Model):
                                       related_name='comment_dislikes',
                                       blank=True)
     parent = models.ForeignKey('self', blank=True, null=True,
-                               on_delete=models.SET_NULL,
+                               on_delete=models.CASCADE,
                                related_name='children')
 
     def __str__(self):

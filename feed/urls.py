@@ -12,4 +12,7 @@ urlpatterns = [
          views.PostDislike.as_view(), name='post_dislike'),
     path('delete/<slug:slug>', views.PostDeleteView.as_view(),
          name='post_delete'),
+    path('comment/delete/<pk>', views.CommentDeleteView.as_view(),
+         name='comment_delete'),
+
 ]

@@ -4,10 +4,6 @@
  
 <div class="container">
     <div class="row">
-        <div class="d-lg-none d-lg-none col-lg-7 offset-lg-1">
-            <a href="{% url 'create' %}">Create Post</a>
-        </div>
-
         <div class="left-column col-lg-7 offset-lg-1 infinite-container">
                 {% for post in post_list %}
             <div class="post-container card infinite-item">
@@ -26,7 +22,7 @@
                         <h2 class="card-title">{{post.title}}</h2>
                     </a>
                     <div class="bottom">
-                        <a href="{% url 'user' post.author.username %}" class="card-footer-text">{{post.author.username}}</a>
+                        by <a href="{% url 'user' post.author.username %}" class="card-footer-text">{{post.author.username}}</a>
                         <span class="card-footer-text"><i class="fa-solid fa-thumbs-up"></i> {{post.number_of_likes}}</span>
                         <span class="card-footer-text"><i class="fa-solid fa-thumbs-down"></i> {{post.number_of_dislikes}}</span>
                         <span class="card-footer-text">{{post.created_on}}</span>
