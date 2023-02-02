@@ -38,7 +38,8 @@ CSRF_TRUSTED_ORIGINS = ['https://8000-frnbdn-project4-d9qa47f21yy.ws-us81.gitpod
 if DEBUG:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-
+SUMMERNOTE_CONFIG = {
+     'width': '100%',}
 
 # Application definition
 

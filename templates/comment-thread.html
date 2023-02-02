@@ -11,11 +11,11 @@
       <a class="text-muted font-italic smaller" data-toggle="collapse" 
       href="#reply{{forloop.counter}}comment{{comment.pk}}" role="button" 
       aria-expanded="false" aria-controls="collapse reply{{forloop.counter}}">
-      Reply
+      reply
       </a>
       {% if comment.commenter == request.user %}
-      <a class="text-muted font-italic smaller" href="{% url 'edit_comment' comment.pk %}"> Edit </a>
-      <a class="font-italic text-danger smaller" href="{% url 'comment_delete' comment.pk %}"> Delete </a>
+      <a class="text-muted font-italic smaller" href="{% url 'edit_comment' comment.pk %}"> edit </a>
+      <a class="font-italic text-danger smaller" href="{% url 'comment_delete' comment.pk %}"> delete </a>
     </div>
       {% endif %}
       <div class="collapse" id="reply{{forloop.counter}}comment{{comment.pk}}">

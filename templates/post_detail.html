@@ -13,7 +13,7 @@
                         by:  <a href="{% url 'user' post.author.username %}">{{post.author.username}}</a>
                         {% if post.author == request.user %}
                             <a class="text-muted pl-2 font-italic smaller" href="{% url 'edit' post.slug %}">&lt;edit&gt;</a>
-                            <span><a href="{% url 'post_delete' post.slug %}" class="text-danger pl-2 font-italic smaller">&lt;Delete Post&gt;</a></span>
+                            <span><a href="{% url 'post_delete' post.slug %}" class="text-danger pl-2 font-italic smaller">&lt;delete&gt;</a></span>
                         {% endif %}
                         <p class="text-muted pl-2 font-italic smaller"> posted on: <span>{{post.created_on}}</span></p>
                     </div>
