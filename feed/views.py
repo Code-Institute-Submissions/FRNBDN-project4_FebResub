@@ -129,42 +129,6 @@ class PostDislike(View):
         return redirect('post_detail', slug=slug)
 
 
-class CommentLike(View):
-
-    def post(self, request, slug):
-        post = get_object_or_404(Post, slug=slug)
-        comment = get_object_or_404(Comment, id=self.id)
-
-        if comment.likes.filter(id=request.user.id).exists():
-            comment.likes.remove(request.user)
-
-        elif comment.dislikes.filter(id=request.user.id).exists():
-            comment.dislikes.remove(request.user)
-            comment.likes.add(request.user)
-
-        else:
-            comment.likes.add(request.user)
-
-        return redirect('post_detail', slug=slug)
-
-
-class CommentDislike(View):
-
-    def post(request, slug):
-        post = get_object_or_404(Post, slug=slug)
-        comment = get_object_or_404(Comment, id=self.id)
-
-        if comment.likes.filter(id=request.user.id).exists():
-            comment.likes.remove(request.user)
-            comment.dislikes.add(request.user)
-
-        elif comment.dislikes.filter(id=request.user.id).exists():
-            comment.dislikes.remove(request.user)
-        else:
-            comment.dislikes.add(request.user)
-        return redirect('post_detail', slug=slug)
-
-
 class PostDeleteView(generic.DeleteView):
     model = Post
     success_url = "/"
@@ -173,6 +137,16 @@ class PostDeleteView(generic.DeleteView):
 
 class CommentDeleteView(generic.DeleteView):
     model = Comment
-    success_url = "/"
     template_name = "comment_confirm_delete.html"
 
+    def get_success_url(self):
+        return redirect('post_detail', slug=self.object.post.slug)
+
+
+class EditCommentView(generic.UpdateView):
+    model = Comment
+    fields = ['body']
+    template_name = 'edit_comment.html'
+
+    def get_success_url(self):
+        return redirect('post_detail', slug=self.object.post.slug)

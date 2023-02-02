@@ -2,7 +2,7 @@
         
 {% for comment in comments %}
 
-<div class="comment border-left border-primary {% if forloop.first %}{%else%}offset-1{%endif%}{% if forloop.first %} rounded-top offset-0 {%endif%}{% if forloop.last %} border-bottom rounded-bottom {%endif%} ">
+<div class="comment border-left border-primary {% if comment.parent %} offset-1{%endif%}{% if comment.parent == false %} rounded-top offset-0 {%endif%}{% if forloop.last %} border-bottom rounded-bottom {%endif%} ">
 
     <div class="comment-info"> <strong>{{ comment.commenter.username}}</strong> on {{ comment.created_on }}</div>
     <p>{{ comment.body|linebreaks }}</p>
@@ -14,6 +14,7 @@
       Reply
       </a>
       {% if comment.commenter == request.user %}
+      <a class="text-muted font-italic smaller" href="{% url 'edit_comment' comment.pk %}"> Edit </a>
       <a class="font-italic text-danger smaller" href="{% url 'comment_delete' comment.pk %}"> Delete </a>
     </div>
       {% endif %}
@@ -26,7 +27,6 @@
           </form>
         </div>
       </div>
-    </div>
     
 {% endif %}
     {% if comment.children.count > 0 %}
