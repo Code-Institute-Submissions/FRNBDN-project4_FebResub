@@ -32,8 +32,8 @@
             <a class="navbar-brand d-sm-block d-none" href="{% url 'home' %}"><span class="logo-font">BLOGRUM</span></a>
             <a class="navbar-brand d-block d-sm-none m-1" href="{% url 'home' %}"><span class="logo-font">B</span></a>
           </div>
-          {% if user.is_authenticated%}
           <div class="mx-1 flex-fill text-right d-block d-lg-none">
+          {% if user.is_authenticated%}
             <a href="{% url 'user' user.username %}"><i class="fa-solid fa-user"></i> {{user.username}}: </a>
             <span><i class="fa-solid fa-envelopes-bulk"></i>:{{user.number_of_posts}}</span> 
             <span><i class="fa-regular fa-message"></i>: {{user.number_of_comments}}</span>

@@ -1,108 +1,186 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Blogrum
+## Portfolio Project 4
 
-Welcome FRNBDN,
+This project is built as part of the Code Institute Full Stack Software Development course. The Blogrum Website is a combination of a Blog and Forum, It's a social network of blogs, where you can see all the posts for all blogs on the homepage or you can go into individual profiles and see a list of all their posts.
 
-This is the Code Institute student template for Gitpod. We have preinstalled all of the tools you need to get started. It's perfectly ok to use this template as the basis for your project submissions.
+![Responsice Mockup]()
+### Live Site
 
-You can safely delete this README.md file, or change it for your own project. Please do read it at least once, though! It contains some important information about Gitpod and the extensions we use. Some of this information has been updated since the video content was created. The last update to this file was: **September 1, 2021**
+[Blogrum](https://blogrum.herokuapp.com/)
+### Github Repository
 
-## Gitpod Reminders
+[Project4](https://github.com/FRNBDN/project4)
+## UX
 
-To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
+### Website Goals
 
-`python3 -m http.server`
+The main use of the website is to provide a platform that is a cross between a blog and a forum. On the website users can post posts aswell as discuss them in the comments. Each user also has control over their own posts and comments, so they may delete and edit them as they need to. You can also see all your or other users posts on the respective profiles.
 
-A blue button should appear to click: _Make Public_,
+### Target Audience
 
-Another blue button should appear to click: _Open Browser_.
+The target audience for this website are people who wishes to post and discuss any kind of topic, the website has no specific demographic it tries to cater to, but rather just a platform where discussions and posting of interesting things can be done. The users of the website will determine the demographic based on the content it's being used for
 
-To run a backend Python file, type `python3 app.py`, if your Python file is named `app.py` of course.
+### User Stories
 
-A blue button should appear to click: _Make Public_,
+User stories were brainstormed on my own, with having a website like reddit and other types of similar forums in mind.
 
-Another blue button should appear to click: _Open Browser_.
+* title
+* clear description
 
-In Gitpod you have superuser security privileges by default. Therefore you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
+In the picture below you can see an example of the project board as the items have been finished off.
 
-To log into the Heroku toolbelt CLI:
+![user stories board](static/images/projectboard.png)
 
-1. Log in to your Heroku account and go to *Account Settings* in the menu under your avatar.
-2. Scroll down to the *API Key* and click *Reveal*
-3. Copy the key
-4. In Gitpod, from the terminal, run `heroku_config`
-5. Paste in your API key when asked
+[Link to the final board](https://github.com/users/FRNBDN/projects/3/views/1), there are three items that was left out. The reason for them not being completed as they were deemed not essential for the project.
 
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you so do not share it. If you accidentally make it public then you can create a new one with _Regenerate API Key_.
 
-------
+### Structure of the website
 
-## Release History
+The Website is designed to have all the most recent posts show up on the homepage, and easy navigation between all pages without having information overlaod at the same time, so there are plenty of links to profiles/posts and what not without having too many things on the screen at once. Each page is also designed for one feature, to keep each page focused on it's designed task.
 
-We continually tweak and adjust this template to help give you the best experience. Here is the version history:
+### Database Diagram
 
-**September 1 2021:** Remove `PGHOSTADDR` environment variable.
+The database diagram was created with an online diagram tool in Lucid Charts. Here the link between the different models are clearly laid out and planned out as shown in the image below.
 
-**July 19 2021:** Remove `font_fix` script now that the terminal font issue is fixed.
+Database diagram:
 
-**July 2 2021:** Remove extensions that are not available in Open VSX.
+![database diagram]()
 
-**June 30 2021:** Combined the P4 and P5 templates into one file, added the uptime script. See the FAQ at the end of this file.
+### Models
 
-**June 10 2021:** Added: `font_fix` script and alias to fix the Terminal font issue
+Account Model
 
-**May 10 2021:** Added `heroku_config` script to allow Heroku API key to be stored as an environment variable.
+The account model used in the project is a custom user model that overrides the Basic Django User Model, it changes the login field from the username to the email. The model also handles the creation of the super user. 
+* Has email & password fields for signing
+* Username field for display name
 
-**April 7 2021:** Upgraded the template for VS Code instead of Theia.
+The Post model:
 
-**October 21 2020:** Versions of the HTMLHint, Prettier, Bootstrap4 CDN and Auto Close extensions updated. The Python extension needs to stay the same version for now.
+* has a slug parament to be used in the url/as an id for the post
+* author has a foreign key relationship with the user model.
+* thumbnails are stored in Cloudinary via a CloudinaryField.
+* Has a listed value, to allow admins to unlist any post with questionable material before reviewing it and potentially deleting it.
+* Likes & dislikes as ManyToMany fields
 
-**October 08 2020:** Additional large Gitpod files (`core.mongo*` and `core.python*`) are now hidden in the Explorer, and have been added to the `.gitignore` by default.
 
-**September 22 2020:** Gitpod occasionally creates large `core.Microsoft` files. These are now hidden in the Explorer. A `.gitignore` file has been created to make sure these files will not be committed, along with other common files.
+The Comment model:
 
-**April 16 2020:** The template now automatically installs MySQL instead of relying on the Gitpod MySQL image. The message about a Python linter not being installed has been dealt with, and the set-up files are now hidden in the Gitpod file explorer.
+* has foreign key relationships with the user model and the post model.
+* has a foreign key relationship with it's parent commment, used for comments that are replies to other comments.
 
-**April 13 2020:** Added the _Prettier_ code beautifier extension instead of the code formatter built-in to Gitpod.
 
-**February 2020:** The initialisation files now _do not_ auto-delete. They will remain in your project. You can safely ignore them. They just make sure that your workspace is configured correctly each time you open it. It will also prevent the Gitpod configuration popup from appearing.
+### Color Scheme
 
-**December 2019:** Added Eventyret's Bootstrap 4 extension. Type `!bscdn` in a HTML file to add the Bootstrap boilerplate. Check out the <a href="https://github.com/Eventyret/vscode-bcdn" target="_blank">README.md file at the official repo</a> for more options.
+The colors that were used for the website were largely blue, this is because blue conveys a calm and intellegent emotion, since this wesbite is going to be centered around discussions, having colors that reflect more calm and serene emotions rather than more agression was the option.
 
-------
+![color scheme](static/images/colors.png)
 
-## FAQ about the uptime script
+### Features
 
-**Why have you added this script?**
+The main features of the app are as follows
 
-It will help us to calculate how many running workspaces there are at any one time, which greatly helps us with cost and capacity planning. It will help us decide on the future direction of our cloud-based IDE strategy.
+#### Main Page/Feed
 
-**How will this affect me?**
+#### Account Profiles
 
-For everyday usage of Gitpod, it doesn’t have any effect at all. The script only captures the following data:
+#### Post Detial
 
-- An ID that is randomly generated each time the workspace is started.
-- The current date and time
-- The workspace status of “started” or “running”, which is sent every 5 minutes.
+#### Nav bar 
 
-It is not possible for us or anyone else to trace the random ID back to an individual, and no personal data is being captured. It will not slow down the workspace or affect your work.
+#### Post Edit/Create
 
-**So….?**
+#### Comment Edit
 
-We want to tell you this so that we are being completely transparent about the data we collect and what we do with it.
+#### Comment Section
 
-**Can I opt out?**
+#### Footer
 
-Yes, you can. Since no personally identifiable information is being captured, we'd appreciate it if you let the script run; however if you are unhappy with the idea, simply run the following commands from the terminal window after creating the workspace, and this will remove the uptime script:
+#### Login/Logout
 
-```
-pkill uptime.sh
-rm .vscode/uptime.sh
-```
+#### Register
 
-**Anything more?**
+#### Account Update
 
-Yes! We'd strongly encourage you to look at the source code of the `uptime.sh` file so that you know what it's doing. As future software developers, it will be great practice to see how these shell scripts work.
+#### Account Recovery
 
----
+#### Admin
 
-Happy coding!
+### Future Features
+
+#### Comment Upvote/Downvote
+
+#### Searchbar
+
+#### Following Users
+
+## Credits
+
+### Code
+
+### Images
+
+### Technologies used
+
+[HTML](https://html.spec.whatwg.org/) - for the structure of the website and mocking of the terminal (written by Code Institute)
+
+[HTMLemail/inline](https://htmlemail.io/inline/) - for making the email html template into inline html.
+
+[CSS](https://www.w3.org/Style/CSS/Overview.en.html) - to provide styling to the page.
+
+[JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) - for the structure of the website and mocking of the terminal (written by Code Institute)
+
+[Python](https://www.python.org/) - to write all the logic of the app
+
+[Django](https://www.djangoproject.com/) - used as main framework for the app, which both all backend and most frontend elements are built on. The following notable libraries/packages were added to django:
+
+* cloudinary: for saving images in cloudinary and serving them to the client.
+* django-crispy-forms: for making the django forms look better.
+
+[ElephantSQL](https://www.elephantsql.com/) - used to manage a PostgreSQL database.
+
+[Bootstrap 5.2](https://getbootstrap.com/) - used to style the brunt of the project.
+
+[Jquery](https://jquery.com/) - to make DOM manipulation a bit less painful.
+
+[Lucidchart](https://www.lucidchart.com/pages/) used to make a database diagram.
+
+[Gitpod](https://www.gitpod.io/) - used to connect a browser based VScode to github.
+
+[Github](https://github.com/) - used for version control and deployment of the website.
+
+[Heroku](https://dashboard.heroku.com/) - to deploy the app.
+
+[JShint](https://jshint.com/) - used to validate javascript.
+
+[NuHtmlChecker](https://validator.w3.org/nu/) - used to validate HTML.
+
+[Multi Device Website Mockup Generator](https://techsini.com/multi-mockup/index.php) - to create an image of the website shown on different devices.
+
+## Testing
+
+## Security Features and Defensive Design
+
+### User authentication
+
+### Form Validation
+
+
+### Database Security
+
+## Deployment
+
+### Local Deployment
+
+### Production Deployment Initial
+
+#### Create Heroku app:
+
+#### Connect Postgres Database:
+
+#### Deploy App on Heroku:
+
+### Production Deployment Update
+
+#### PostgreSQL database:
+
+## Acknowledgements
