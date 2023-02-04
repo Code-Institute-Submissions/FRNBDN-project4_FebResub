@@ -2,35 +2,33 @@
 {% load crispy_forms_tags %}
 {% block content %}
 
-
-  <div class="container">
-    <div class="row">
-        <div class="left-column col-lg-7 offset-lg-1">
-          <div class="post-container card flex-column p-4">
-            {% if comment.commenter == request.user %}
-            <form method="POST">{% csrf_token %}
-              <h1>Confirm Delete Comment</h1>
-              <p>Are you sure you want to delete the comment?</p>
-              <button class="btn btn-danger w-100" type="submit">Delete Comment</button>  
-            </form>
-            {% else %}
+<div class="container">
+  <div class="row">
+      <div class="left-column col-lg-7 offset-lg-1">
+        <div class="post-container card flex-column p-4">
+          {% if comment.commenter == request.user %}
+          <form method="POST">{% csrf_token %}
+            <h1>Confirm Delete Comment</h1>
+            <p>Are you sure you want to delete the comment?</p>
+            <button class="btn btn-danger w-100" type="submit">Delete Comment</button>  
+          </form>
+          {% else %}
+          
+          <div class="card d-flex flex-column">
+              <p>You have to be the owner to delete a comment! </p>
+              {% if user.is_authenticated == false %}
+              <div>
+                  <a href="{% url 'login' %}" class="btn btn-primary"> Login </a>
+                  <a href="{% url 'register' %}" class="btn btn-primary"> Register </a>
+              </div>
+              {% endif %}
+          </div>
+          {% endif %}
             
-            <div class="card d-flex flex-column">
-                <p>You have to be the owner to delete a comment! </p>
-                {% if user.is_authenticated == false %}
-                <div>
-                    <a href="{% url 'login' %}" class="btn btn-primary"> Login </a>
-                    <a href="{% url 'register' %}" class="btn btn-primary"> Register </a>
-                </div>
-                {% endif %}
-            </div>
-            {% endif %}
-              
-              
+            
 
-        </div>
-    </div>
+      </div>
   </div>
-
+</div>
 
 {% endblock %}

@@ -26,12 +26,14 @@
     
 </head>
 <body>
+      <!-- Nav Start -->
       <nav class="navbar navbar-expand">
         <div class="container-fluid d-flex flex-wrap">
           <div>
             <a class="navbar-brand d-sm-block d-none" href="{% url 'home' %}"><span class="logo-font">BLOGRUM</span></a>
             <a class="navbar-brand d-block d-sm-none m-1" href="{% url 'home' %}"><span class="logo-font">B</span></a>
           </div>
+          <!-- Mobile Settings Display Start -->
           <div class="mx-1 flex-fill text-right d-block d-lg-none">
           {% if user.is_authenticated%}
             <a href="{% url 'user' user.username %}"><i class="fa-solid fa-user"></i> {{user.username}}: </a>
@@ -52,7 +54,10 @@
             <a class="btn btn-primary flex-fill m-1" href="{% url 'create' %}">Create Post <i class="fa-regular fa-envelope"></i></a>
           </div>
         </div>
+        <!-- Mobiel Settings Display End -->
       </nav>
+      <!-- Nav End -->
+      <!-- Sidebar Settings Display Start -->
       <div class="sidebar-item sticky-top d-lg-flex d-none">
         <div class="sidebar card flex-column">
           {% if user.is_authenticated%}
@@ -73,14 +78,13 @@
           <p><a class="btn btn-primary" href="{% url 'create' %}">Create Post <i class="fa-regular fa-envelope"></i></a></p>
         </div>
       </div>
+      <!-- Sidebar Settings Display End -->
     <main class="min-vh-100 d-block">
-      
-      
-  
         {% block content %}
 
         {% endblock content %}
     </main>
+      <!-- Footer -->
       <footer class="sticky-bottom footer">
         <p class="pt-3 text-center">© Blogrum</p>
       </footer>

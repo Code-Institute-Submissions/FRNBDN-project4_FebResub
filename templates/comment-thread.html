@@ -1,25 +1,32 @@
 {% block content %}
         
 {% for comment in comments %}
-
-<div class="comment border-left border-primary {% if comment.parent %} offset-1{%endif%}{% if comment.parent == false %} rounded-top offset-0 {%endif%}{% if forloop.last %} border-bottom rounded-bottom {%endif%} ">
-
-    <div class="comment-info"> <strong>{{ comment.commenter.username}}</strong> on {{ comment.created_on }}</div>
-    <p>{{ comment.body|linebreaks }}</p>
+<div class="comment border-left border-primary {% if comment.parent %} 
+            offset-1{%endif%}{% if comment.parent == false %} rounded-top offset-0 {%endif%}
+            {% if forloop.last %} border-bottom rounded-bottom {%endif%} ">
+    <div class="comment-info">
+      <strong>{{ comment.commenter.username}}</strong> on {{ comment.created_on }}
+    </div>
+    <p>
+      {{ comment.body|linebreaks }}
+    </p>
     {% if user.is_authenticated %}
     <div>
+      <!-- Comment Reply -->
       <a class="text-muted font-italic smaller" data-toggle="collapse" 
       href="#reply{{forloop.counter}}comment{{comment.pk}}" role="button" 
       aria-expanded="false" aria-controls="collapse reply{{forloop.counter}}">
       reply
       </a>
       {% if comment.commenter == request.user %}
+      <!-- Comment Edit/Delete -->
       <a class="text-muted font-italic smaller" href="{% url 'edit_comment' comment.pk %}"> edit </a>
       <a class="font-italic text-danger smaller" href="{% url 'comment_delete' comment.pk %}"> delete </a>
     </div>
       {% endif %}
       <div class="collapse" id="reply{{forloop.counter}}comment{{comment.pk}}">
         <div class="card card-body">
+            <!-- Comment Reply Form -->
             <form action="" method="POST" id="main_form" class="comment_form  w-100 d-flex">
                 <input type="text" name="body" class="form-control mr-1" placeholder="Type your reply here"> 
                 <input type="hidden" value="{{ comment.pk }}" name="parent"> {% csrf_token %} 
@@ -29,6 +36,7 @@
       </div>
     
 {% endif %}
+    <!-- Have comments children comments nested in the comment div -->
     {% if comment.children.count > 0 %}
         {% include "comment-thread.html" with comments=comment.children.all %}
     {% endif %}

@@ -2,52 +2,50 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-<div class="container">
-    <div class="row">
 
-        <div class="left-column col-lg-7 offset-lg-1">
-            
-            <div class="post-container card flex-column p-4">
-                {% if user.is_authenticated %}
-                <h2>
-                    {% if create %}
-                        Create Post
-                    {% else %}
-                        Edit Post
-                    {% endif %}
-                </h2>
-                <form class="w-100" method="post"
-                      enctype="multipart/form-data">
-                    {% csrf_token %}
-                  
-                    {{ form | crispy }}
-                    <div>
-                    <button class="btn btn-primary" type="submit" value="Upload"> 
-                        {% if create %}
-                            Create Post
-                        </button>
-                        </div>
-                        {% else %}
-                            Save Changes
-                        </button>
-                        
-                        </div>
-                        {% endif %}
-                </form>
-                
-                {% else %}
-                
-                <div class="card d-flex flex-column">
-                    <p>You have to be logged in to post! </p>
-                    <div>
-                        <a href="{% url 'login' %}" class="btn btn-primary"> Login </a>
-                        <a href="{% url 'register' %}" class="btn btn-primary"> Register </a>
-                    </div>
-                </div>
-                {% endif %}
-            </div>
+<div class="container">
+  <div class="row">
+    <div class="left-column col-lg-7 offset-lg-1">
+      <div class="post-container card flex-column p-4">
+        {% if user.is_authenticated %}
+        <!-- Create/Edit Post -->
+        <h2>
+          {% if create %}
+              Create Post
+          {% else %}
+              Edit Post
+          {% endif %}
+        </h2>
+        <form class="w-100" method="post"
+          enctype="multipart/form-data">
+          {% csrf_token %}
+        
+          {{ form | crispy }}
+          <div>
+            <button class="btn btn-primary" type="submit" value="Upload"> 
+            {% if create %}
+              Create Post
+            </button>
+          </div>
+            {% else %}
+              Save Changes
+            </button>
+          </div>
+            {% endif %}
+        </form>
+        {% else %}
+        <div class="card d-flex flex-column">
+          <!-- If not logged in -->
+          <p>You have to be logged in to post! </p>
+          <div>
+            <a href="{% url 'login' %}" class="btn btn-primary"> Login </a>
+            <a href="{% url 'register' %}" class="btn btn-primary"> Register </a>
+          </div>
         </div>
+        {% endif %}
+      </div>
     </div>
+  </div>
 </div>
 
 {%endblock%}

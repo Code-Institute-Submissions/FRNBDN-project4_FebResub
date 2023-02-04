@@ -4,12 +4,15 @@ from feed.models import *
 
 
 class MyAccountManager(BaseUserManager):
+    """
+    Account Creation Model.
+    """
     def create_user(self, email, username, password=None):
         if not email:
             raise ValueError('You need to use an email to log in as a user!')
         if not username:
             raise ValueError('Please input a username')
-    
+
         user = self.model(
             email=self.normalize_email(email),
             username=username
@@ -17,7 +20,7 @@ class MyAccountManager(BaseUserManager):
         user.set_password(password)
         user.save(using=self._db)
         return user
-    
+
     def create_superuser(self, email, username, password):
         user = self.create_user(
             email=self.normalize_email(email),
@@ -31,8 +34,10 @@ class MyAccountManager(BaseUserManager):
         return user
 
 
-# Custom General User Model
 class Account(AbstractBaseUser):
+    """
+    Custom User Model.
+    """
     email = models.EmailField(max_length=60, unique=True)
     username = models.CharField(max_length=30, unique=True)
     date_joined = models.TimeField(auto_now_add=True,

@@ -16,6 +16,9 @@ class Feed(generic.ListView):
 
 
 class PostDetail(View):
+    """
+    Post Detail View.
+    """
     def get(self, request, slug, *args, **kwargs):
         queryset = Post.objects.filter(listed=True)
         post = get_object_or_404(queryset, slug=slug)
@@ -96,7 +99,9 @@ def edit_post(request, slug):
 
 
 class PostLike(View):
-
+    """
+    PostLike View.
+    """
     def post(self, request, slug):
         post = get_object_or_404(Post, slug=slug)
 
@@ -114,7 +119,9 @@ class PostLike(View):
 
 
 class PostDislike(View):
-
+    """
+    PostDislike View.
+    """
     def post(self, request, slug):
         post = get_object_or_404(Post, slug=slug)
 
@@ -131,12 +138,18 @@ class PostDislike(View):
 
 
 class PostDeleteView(generic.DeleteView):
+    """
+    Post Delete View.
+    """
     model = Post
     success_url = "/"
     template_name = "post_confirm_delete.html"
 
 
 class CommentDeleteView(generic.DeleteView):
+    """
+    Comment Delete View.
+    """
     model = Comment
     template_name = "comment_confirm_delete.html"
 
@@ -145,6 +158,9 @@ class CommentDeleteView(generic.DeleteView):
 
 
 class EditCommentView(generic.UpdateView):
+    """
+    Comment Edit View.
+    """
     model = Comment
     fields = ['body']
     template_name = 'edit_comment.html'

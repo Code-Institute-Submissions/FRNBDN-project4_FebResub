@@ -2,10 +2,10 @@
 {% load crispy_forms_tags %}
 {% block content %}
 
-
   <div class="container">
     <div class="row">
-        <div class="left-column col-lg-7 offset-lg-1 infinite-container">
+        <div class="left-column col-lg-7 offset-lg-1">
+          <!-- Delete Post Confirmation -->
           <div class="post-container card flex-column p-4">
             {% if post.author == request.user %}
             <form method="POST">{% csrf_token %}
@@ -14,10 +14,11 @@
               <button class="btn btn-danger w-100" type="submit">Delete Post</button>  
             </form>
             {% else %}
-            
+            <!-- If user not owner -->
             <div class="card d-flex flex-column">
                 <p>You have to be the owner to delete a Post! </p>
                 {% if user.is_authenticated == false %}
+                <!-- If user not authenticated -->
                 <div>
                     <a href="{% url 'login' %}" class="btn btn-primary"> Login </a>
                     <a href="{% url 'register' %}" class="btn btn-primary"> Register </a>
@@ -25,12 +26,8 @@
                 {% endif %}
             </div>
             {% endif %}
-              
-              
-
         </div>
     </div>
   </div>
-
 
 {% endblock %}

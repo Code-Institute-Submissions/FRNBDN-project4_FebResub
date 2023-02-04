@@ -7,6 +7,9 @@ from django.utils.text import slugify
 
 
 class Post(models.Model):
+    """
+    Post model.
+    """
     title = models.CharField(max_length=100, unique=True)
     slug = models.SlugField(max_length=100, unique=True)
     author = models.ForeignKey(settings.AUTH_USER_MODEL,
@@ -27,7 +30,7 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
-    
+
     def children(self):
         return self.comments.filter(parent=None)
 
@@ -44,6 +47,9 @@ class Post(models.Model):
 
 
 class Comment(models.Model):
+    """
+    Post model.
+    """
     post = models.ForeignKey(Post, on_delete=models.CASCADE,
                              related_name='comments')
     commenter = models.ForeignKey(settings.AUTH_USER_MODEL,
@@ -70,6 +76,8 @@ class Comment(models.Model):
     def number_of_dislikes(self):
         return self.dislikes.count()
 
+    # Use @property to get all children of the comment and set this
+    # comment as parent, and set is parent to true/false based on result.
     @property
     def children(self):
         return Comment.objects.filter(parent=self).reverse()

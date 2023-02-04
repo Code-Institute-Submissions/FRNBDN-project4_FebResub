@@ -13,7 +13,6 @@ class UserRegistrationForm(UserCreationForm):
 
 
 class LoginForm(forms.ModelForm):
-
     password = forms.CharField(label='Password', widget=forms.PasswordInput)
 
     class Meta:
@@ -29,7 +28,6 @@ class LoginForm(forms.ModelForm):
 
 
 class UpdateUsernameForm(forms.ModelForm):
-
     class Meta:
         model = Account
         fields = ('username', )

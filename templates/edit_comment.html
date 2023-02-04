@@ -3,35 +3,34 @@
 {% block content %}
 
 
-  <div class="container">
-    <div class="row">
-        <div class="left-column col-lg-7 offset-lg-1">
-          <div class="post-container card flex-column p-4">
-            {% if comment.commenter == request.user %}
-            <form method="POST">{% csrf_token %}
-              <h1>Edit Comment:</h1>
-              {% csrf_token %}
-              {{ form | crispy }}
-              <button class="btn btn-primary w-100" type="submit">Update Comment</button>  
-            </form>
-            {% else %}
-            
-            <div class="card d-flex flex-column">
-                <p>You have to be the owner to edit a Comment! </p>
-                {% if user.is_authenticated == false %}
-                <div>
-                    <a href="{% url 'login' %}" class="btn btn-primary"> Login </a>
-                    <a href="{% url 'register' %}" class="btn btn-primary"> Register </a>
-                </div>
-                {% endif %}
-            </div>
-            {% endif %}
-              
-              
-
-        </div>
-    </div>
+<div class="container">
+  <div class="row">
+      <div class="left-column col-lg-7 offset-lg-1">
+        <div class="post-container card flex-column p-4">
+          {% if comment.commenter == request.user %}
+          <!-- Comment Edit -->
+          <form method="POST">{% csrf_token %}
+            <h1>Edit Comment:</h1>
+            {% csrf_token %}
+            {{ form | crispy }}
+            <button class="btn btn-primary w-100" type="submit">Update Comment</button>  
+          </form>
+          {% else %}
+          <!-- If not owner of comment -->
+          <div class="card d-flex flex-column">
+              <p>You have to be the owner to edit a Comment! </p>
+              {% if user.is_authenticated == false %}
+              <!-- If not logged in -->
+              <div>
+                  <a href="{% url 'login' %}" class="btn btn-primary"> Login </a>
+                  <a href="{% url 'register' %}" class="btn btn-primary"> Register </a>
+              </div>
+              {% endif %}
+          </div>
+          {% endif %}
+      </div>
   </div>
+</div>
 
 
 {% endblock %}
