@@ -29,17 +29,18 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
+X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 ALLOWED_HOSTS = ['blogrum.herokuapp.com', 'localhost', '127.0.0.1']
-CSRF_TRUSTED_ORIGINS = ['https://8000-frnbdn-project4-d9qa47f21yy.ws-us81.gitpod.io', 'https://8000-frnbdn-project4-d9qa47f21yy.ws-us82.gitpod.io', 'https://8000-frnbdn-project4-d9qa47f21yy.ws-us84.gitpod.io', 'https://8000-frnbdn-project4-d9qa47f21yy.ws-us85.gitpod.io']
+CSRF_TRUSTED_ORIGINS = ['https://blogrum.herokuapp.com',]
 
 # Sets email backend to console when in debug mode
 if DEBUG:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 SUMMERNOTE_CONFIG = {
-     'width': '100%',}
+     'width': '100%', }
 
 # Application definition
 
