@@ -19,7 +19,7 @@ class PostDetail(View):
     def get(self, request, slug, *args, **kwargs):
         queryset = Post.objects.filter(listed=True)
         post = get_object_or_404(queryset, slug=slug)
-        comments = Comment.objects.filter(post=post).order_by('-created_on')   
+        comments = Comment.objects.filter(post=post).order_by('-created_on')
         liked = False
         disliked = False
         if post.likes.filter(id=self.request.user.id).exists():
