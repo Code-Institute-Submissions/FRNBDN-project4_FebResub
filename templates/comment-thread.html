@@ -22,8 +22,8 @@
       <!-- Comment Edit/Delete -->
       <a class="text-muted font-italic smaller" href="{% url 'edit_comment' comment.pk %}"> edit </a>
       <a class="font-italic text-danger smaller" href="{% url 'comment_delete' comment.pk %}"> delete </a>
-    </div>
       {% endif %}
+    </div>
       <div class="collapse" id="reply{{forloop.counter}}comment{{comment.pk}}">
         <div class="card card-body">
             <!-- Comment Reply Form -->
