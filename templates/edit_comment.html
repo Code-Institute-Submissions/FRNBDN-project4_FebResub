@@ -8,17 +8,16 @@
       <div class="left-column col-lg-7 offset-lg-1">
         <div class="post-container card flex-column p-4">
           {% if comment.commenter == request.user %}
-          <!-- Comment Edit -->
-          <form method="POST">{% csrf_token %}
+          <form method="POST" action="{% url 'edit_comment' comment.pk %}">
             <h1>Edit Comment:</h1>
             {% csrf_token %}
-            {{ form | crispy }}
+            {{ form.body | as_crispy_field }}
             <button class="btn btn-primary w-100" type="submit">Update Comment</button>  
           </form>
           {% else %}
           <!-- If not owner of comment -->
           <div class="card d-flex flex-column">
-              <p>You have to be the owner to edit a Comment! </p>
+              <p>You have to be the owner to delete a comment! </p>
               {% if user.is_authenticated == false %}
               <!-- If not logged in -->
               <div>

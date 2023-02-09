@@ -146,24 +146,54 @@ class PostDeleteView(generic.DeleteView):
     template_name = "post_confirm_delete.html"
 
 
-class CommentDeleteView(generic.DeleteView):
+class CommentDeleteView(View):
     """
     Comment Delete View.
     """
-    model = Comment
-    template_name = "comment_confirm_delete.html"
 
-    def get_success_url(self):
-        return redirect('post_detail', slug=self.object.post.slug)
+    def get(self, request, pk):
+        if comment.commenter != request.user:
+            return HttpResponse('You may only delete comments you have created.')
+        comment = get_object_or_404(Comment, pk=pk)
+        return render(
+            request,
+            'comment_confirm_delete.html',
+            {'comment': comment}
+            )
+
+    def post(self, request, pk):
+        comment = get_object_or_404(Comment, pk=pk)
+        slug = comment.post.slug
+        comment.delete()
+        return redirect('post_detail', slug=slug)
 
 
-class EditCommentView(generic.UpdateView):
+class EditCommentView(View):
     """
     Comment Edit View.
     """
-    model = Comment
-    fields = ['body']
-    template_name = 'edit_comment.html'
+    def get(self, request, pk):
+        comment = get_object_or_404(Comment, pk=pk)
+        if comment.commenter != request.user:
+            return HttpResponse('You may only edit comments you have created.')
+        form = CommentForm(instance=comment)
+        return render(
+            request,
+            'edit_comment.html',
+            {
+                'form': form,
+                'comment': comment
+                }
+            )
 
-    def get_success_url(self):
-        return redirect('post_detail', slug=self.object.post.slug)
+    def post(self, request, pk):
+        comment = get_object_or_404(Comment, pk=pk)
+        parent = comment.parent
+        slug = comment.post.slug
+        form = CommentForm(request.POST, instance=comment)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.parent = parent
+            comment.save()
+            return redirect('post_detail', slug=slug)
+        return redirect('post_detail', slug=slug)

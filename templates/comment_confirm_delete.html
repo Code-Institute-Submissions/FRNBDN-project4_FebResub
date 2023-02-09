@@ -13,10 +13,11 @@
             <button class="btn btn-danger w-100" type="submit">Delete Comment</button>  
           </form>
           {% else %}
-          
+          <!-- If not owner of comment -->
           <div class="card d-flex flex-column">
               <p>You have to be the owner to delete a comment! </p>
               {% if user.is_authenticated == false %}
+              <!-- If not logged in -->
               <div>
                   <a href="{% url 'login' %}" class="btn btn-primary"> Login </a>
                   <a href="{% url 'register' %}" class="btn btn-primary"> Register </a>
@@ -24,9 +25,6 @@
               {% endif %}
           </div>
           {% endif %}
-            
-            
-
       </div>
   </div>
 </div>
