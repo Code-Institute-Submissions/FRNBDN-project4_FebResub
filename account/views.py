@@ -88,7 +88,9 @@ def user_view(request, username):
                 'username': request.POST['username'],
                 }
         form.save()
-        context['success_message'] = 'Updated!'
+        new_username = form.cleaned_data['username']
+        context['username'] = new_username
+        return redirect('user', username=new_username)
     else:
         form = UpdateUsernameForm(
             initial={

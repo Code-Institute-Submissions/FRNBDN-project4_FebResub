@@ -29,11 +29,11 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 ALLOWED_HOSTS = ['blogrum.herokuapp.com', 'localhost', '127.0.0.1']
-CSRF_TRUSTED_ORIGINS = ['https://blogrum.herokuapp.com',]
+CSRF_TRUSTED_ORIGINS = ['https://blogrum.herokuapp.com', "https://8000-frnbdn-project4-d9qa47f21yy.ws-us86.gitpod.io"]
 
 # Sets email backend to console when in debug mode
 if DEBUG:
