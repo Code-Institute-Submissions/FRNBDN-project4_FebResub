@@ -10,6 +10,7 @@ class PostForm(forms.ModelForm):
         fields = ['title', 'body', 'thumbnail']
         widgets = {
             'body': SummernoteWidget(attrs={'width': '20%'}),
+            'thumbnail': forms.FileInput(attrs={'accept': 'image/*'}),
         }
 
 
