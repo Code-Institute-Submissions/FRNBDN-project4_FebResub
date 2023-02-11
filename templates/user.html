@@ -57,10 +57,10 @@
         <h5>Post History:</h5>
           {% for post in posts %}
           <div class="mb-2">
-            <a class="d-flex flex-wrap align-items-baseline" href="{% url 'post_detail' post.slug %}">
+            <a class="d-flex flex-wrap justify-content-center" href="{% url 'post_detail' post.slug %}">
               <span>{{post.title}}</span> 
               <span class="mx-1">|</span>
-              <span class="d-flex flex-nowrap">
+              <span class="d-flex flex-nowrap align-items-baseline">
                   <i class="fa-solid fa-thumbs-up"></i>: {{post.number_of_likes}} 
                   <i class="fa-solid fa-thumbs-down"></i>: {{post.number_of_dislikes}} 
                   <i class="fa-regular fa-message"></i>:{{post.comments.count}}
