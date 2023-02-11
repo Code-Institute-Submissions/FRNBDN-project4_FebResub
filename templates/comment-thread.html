@@ -1,11 +1,12 @@
 {% block content %}
+{% load humanize %}
         
 {% for comment in comments %}
 <div class="comment border-left border-primary {% if comment.parent %} 
             offset-1{%endif%}{% if comment.parent == false %} rounded-top offset-0 {%endif%}
             {% if forloop.last %} border-bottom rounded-bottom {%endif%} ">
     <div class="comment-info">
-      <strong>{{ comment.commenter.username}}</strong> on {{ comment.created_on }}
+      <strong>{{ comment.commenter.username}}</strong> on {{ comment.created_on|naturaltime }}
     </div>
     <p>
       {{ comment.body|linebreaks }}
