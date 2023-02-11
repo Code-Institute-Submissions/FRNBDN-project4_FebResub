@@ -15,8 +15,8 @@ class Post(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL,
                                on_delete=models.CASCADE,
                                related_name='feed_post')
-    updated_on = models.DateField(auto_now=True)
-    created_on = models.DateField(auto_now_add=True)
+    updated_on = models.DateTimeField(auto_now=True)
+    created_on = models.DateTimeField(auto_now_add=True)
     body = models.TextField()
     thumbnail = CloudinaryField('image', default='placeholder')
     listed = models.BooleanField(default=True)
@@ -57,7 +57,8 @@ class Comment(models.Model):
                                   related_name='commenter',
                                   null=True)
     body = models.TextField()
-    created_on = models.DateField(auto_now_add=True)
+    created_on = models.DateTimeField(auto_now_add=True)
+    updated_on = models.DateTimeField(auto_now=True)
     likes = models.ManyToManyField(settings.AUTH_USER_MODEL,
                                    related_name='comment_likes', blank=True)
     dislikes = models.ManyToManyField(settings.AUTH_USER_MODEL,
