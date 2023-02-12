@@ -30,7 +30,7 @@
             <span class="card-footer-text"><i class="fa-solid fa-message"></i> {{post.comments.count}} </span>
             <span class="card-footer-text"><i class="fa-solid fa-thumbs-up"></i> {{post.number_of_likes}}</span>
             <span class="card-footer-text"><i class="fa-solid fa-thumbs-down"></i> {{post.number_of_dislikes}}</span>
-            <span class="card-footer-text">{{post.created_on|naturaltime}}</span>
+            <span class="card-footer-text">, {{post.created_on|naturaltime}}</span>
             {% if post.author == request.user %}
             <a class="card-footer-text smaller mr-1" href="{% url 'edit' post.slug %}">Edit</a>
             <a href="{% url 'post_delete' post.slug %}" class="text-danger card-footer-text smaller">Delete</a>
