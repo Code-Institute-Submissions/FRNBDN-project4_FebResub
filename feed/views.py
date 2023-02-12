@@ -153,10 +153,10 @@ class CommentDeleteView(View):
     """
 
     def get(self, request, pk):
+        comment = get_object_or_404(Comment, pk=pk)
         if comment.commenter != request.user:
             return HttpResponse(
              'You may only delete comments you have created.')
-        comment = get_object_or_404(Comment, pk=pk)
         return render(
             request,
             'comment_confirm_delete.html',
