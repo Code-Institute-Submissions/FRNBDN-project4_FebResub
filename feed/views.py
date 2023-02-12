@@ -85,6 +85,7 @@ def edit_post(request, slug):
         form = PostForm(request.POST, request.FILES, instance=post)
         if form.is_valid():
             post = form.save(commit=False)
+            post.edited = True
             post.save()
         return redirect('post_detail', slug=post.slug)
 
@@ -195,6 +196,7 @@ class EditCommentView(View):
         if form.is_valid():
             comment = form.save(commit=False)
             comment.parent = parent
+            comment.edited = True
             comment.save()
             return redirect('post_detail', slug=slug)
         return redirect('post_detail', slug=slug)

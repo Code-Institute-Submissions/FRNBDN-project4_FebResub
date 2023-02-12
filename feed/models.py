@@ -24,6 +24,7 @@ class Post(models.Model):
                                    related_name='post_likes', blank=True)
     dislikes = models.ManyToManyField(settings.AUTH_USER_MODEL,
                                       related_name='post_dislikes', blank=True)
+    edited = models.BooleanField(default=False)
 
     class Meta:
         ordering = ['-created_on']
@@ -67,6 +68,10 @@ class Comment(models.Model):
     parent = models.ForeignKey('self', blank=True, null=True,
                                on_delete=models.CASCADE,
                                related_name='children')
+    edited = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ['created_on']
 
     def __str__(self):
         return f"{self.commenter}: {self.body}"
