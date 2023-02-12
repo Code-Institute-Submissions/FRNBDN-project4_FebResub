@@ -134,7 +134,8 @@ Just like for the feed, the edit/delete links are here when youre the owner of t
 
 ![likes](static/images/editdelpost.png)
 
-On the comments card there is a header shwoing the total number of comments, and a comment form that lets you leave a comment, it also tells you want account you're logged in to for clarity. The comments are then displayed below, the comment section is modeled after reddits in that it allows for replying to comments, and when you do so it will be indented and essentially it renders another comment thread inside the comment div, shown in the picture below. As a logged in suer you see the reply link, as the commenter of the comment you see the edit/delete buttons.
+### Comment Section
+On the comments card there is a header showing the total number of comments, and a comment form that lets you leave a comment, it also tells you want account you're logged in to for clarity. The comments are then displayed below, the comment section is modeled after reddits in that it allows for replying to comments, and when you do so it will be indented and essentially it renders another comment thread inside the comment div, shown in the picture below. As a logged in suer you see the reply link, as the commenter of the comment you see the edit/delete buttons.
 
 Empty comment section
 
@@ -173,32 +174,86 @@ Post without image
 ![psotnoimg](static/images/postnoimg.png)
 
 ### Post Delete Confirm
+When trying to delete a post you get redirected to this screen:
+
+![postdeleteconf](static/images/deletepostconf.png)
+
+Which in turn redirects you to home page when clicking the delete post button, 
+the cancel button returns you to the page that you were on previously.
 
 ### Comment Edit
+When editing a comment you arrive at the comment edit screen, here you get to alter the message of your comment adn then press update, 
+you may cancel at any time, and the button works the same as for the Post Delete Confirm screen. Update redirects you to the post.
 
-### Comment Section
+![postdeleteconf](static/images/updatecomment.png)
 
 ### Comment Delete Confirm
+Same as post delete but for comment. Only difference is that the redirect is to the post detail of the comment.
+
+![comconfdel](static/images/comconfdel.png)
 
 ### Footer
+The footer is a simple sticky footer that always loads off screen by making the main section 100vh.
 
-### Login/Logout
+![footer](static/images/footer.png)
+
+### Login
+Login Redirects to home and logs in the user when successful, and there are links to the register page and the forgot password page below the form.
+
+Login Screen
+
+![login](static/images/login.png)
+
+Login Error
+
+![loginerror](static/images/loginerror.png)
+
+### Logout
+Logout simply logs out the user and redirects to home when pressed
 
 ### Register
+Register screen has an email, username and 2 password fields, the username and email are checked to see that they are not already in use. The password has a number of cirteria listed inbetween the to password fields. 'Already have an account?' links back to login page.
 
-### Account Update
+![register](static/images/register.png)
 
-### Account Recovery
+### Password Recovery
+When clicking forgot password on the login screen you get to the password recovery screen.
+
+Here you enter your email and you will receive a email to reset your password, link to home is avaialble. Below is the reset pass screen, email that has been sent and the success screen
+
+Reset screen
+
+![resetpass](static/images/resetpass.png)
+
+After pressing reset password
+
+### !!!!succes screen neeeded!!!
+
+Email that is sent out 
+
+![emailsent](static/images/emailsent.png)
+
+Link in email, I couldnt get the email or this page to take my templates over the standard templates provided in django.
+
+### !!!!EMAIL CLICKTHROUGH NEEDED!!!
+
+### Password Update
 
 ### Admin
 
 ## Future Features
 
+### Comment Indentation Update
+
 ### Comment Upvote/Downvote
+
+### Comment Cascade on delete to Protect
 
 ### Searchbar
 
-### Following Users
+### Follow users
+
+### Following feed
 
 # Credits
 
