@@ -9,9 +9,13 @@
           <div class="post-container card flex-column p-4">
             {% if post.author == request.user %}
             <form method="POST">{% csrf_token %}
-              <h1>Confirm Delete Post</h1>
+              <h3>Confirm Delete Post</h3>
               <p>Are you sure you want to delete the post?</p>
-              <button class="btn btn-danger w-100" type="submit">Delete Post</button>  
+              <div class="d-flex flex-wrap flex-fill">
+                <button class="btn btn-danger flex-fill m-1" type="submit">Delete Post</button> 
+                <a class="btn btn-secondary flex-fill m-1" href="{{request.META.HTTP_REFERER}}"> Cancel </a> 
+              </div>
+              
             </form>
             {% else %}
             <!-- If user not owner -->

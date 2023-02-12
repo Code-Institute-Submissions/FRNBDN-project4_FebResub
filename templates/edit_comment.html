@@ -9,10 +9,13 @@
         <div class="post-container card flex-column p-4">
           {% if comment.commenter == request.user %}
           <form method="POST" action="{% url 'edit_comment' comment.pk %}">
-            <h1>Edit Comment:</h1>
+            <h2>Edit Comment:</h2>
             {% csrf_token %}
             {{ form.body | as_crispy_field }}
-            <button class="btn btn-primary w-100" type="submit">Update Comment</button>  
+            <div class="d-flex flex-wrap flex-fill">
+              <button class="btn btn-primary flex-fill m-1" type="submit">Update Comment</button> 
+              <a class="btn btn-secondary flex-fill m-1" href="{{request.META.HTTP_REFERER}}"> Cancel </a> 
+            </div>
           </form>
           {% else %}
           <!-- If not owner of comment -->
