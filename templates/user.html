@@ -10,9 +10,9 @@
     <div class="left-column col-lg-7 offset-lg-1 infinite-container">
       <div class="post-container card flex-column p-4">
         <div>
-            <h5>Account Settings: {{ request.user.email }}</h5>
+            <h5>Account Settings:</h5>
         </div>
-        <div class="card flex-row p-4">
+        <div class="card flex-row">
           <div class="row">
             <div class="col-12">
               <!-- Username Update Form -->
@@ -48,10 +48,10 @@
       <div class="post-container card flex-column p-4">
         <!-- Public user information -->
         <div class="d-flex flex-column align-items-center flex-wrap">
-          <div><h3 class="card-title mr-1 mb-0">{{request.user.username}}</h3></div>
+          <div><h3 class="card-title mr-1 mb-0">{{profile.username}}</h3></div>
           <div class="d-flex flex-wrap align-items-center">
-            <span class="text-muted pl-2 font-italic flex-fill text-center smaller">Joined {{request.user.date_joined|date:"M d, Y" }}</span>
-            <span class="text-muted pl-2 font-italic flex-fill text-center smaller">Last login {{request.user.last_login|naturaltime}}</span>
+            <span class="text-muted pl-2 font-italic flex-fill text-center smaller">Joined {{profile.date_joined|date:"M d, Y" }}</span>
+            <span class="text-muted pl-2 font-italic flex-fill text-center smaller">Last login {{profile.last_login|naturaltime}}</span>
           </div>
         </div>
         <h5>Post History:</h5>
