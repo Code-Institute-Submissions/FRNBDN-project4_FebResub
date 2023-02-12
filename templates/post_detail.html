@@ -15,13 +15,19 @@
             <h5 class="card-title d-block d-md-none mr-1">{{post.title}}</h5>
             <span class="d-flex flex-nowrap">by:  <a href="{% url 'user' post.author.username %}">{{post.author.username}}</a> </span>
             <span class="d-flex no-wrap">
-            <p class="text-muted pl-2 font-italic smaller"><span>{{post.created_on|naturaltime}}</span></p>
+              <p class="text-muted pl-2 font-italic smaller"><span>{{post.created_on|naturaltime}}</span></p>
+              {% if post.edited %}
+              <p class="text-muted pl-2 font-italic smaller"><span>(edited {{post.updated_on|naturaltime}})</span></p>
+            </span>
+            {% endif %}
             <!-- Post Interactions if author -->
             {% if post.author == request.user %}
+            <span class="d-flex no-wrap">
                 <a class="text-muted pl-2 font-italic smaller" href="{% url 'edit' post.slug %}">&lt;edit&gt;</a>
                 <a href="{% url 'post_delete' post.slug %}" class="text-danger pl-2 font-italic smaller">&lt;delete&gt;</a>
+            </span>
             {% endif %}
-          </span>
+          
           </div>
           <!-- Post Like/Dislike -->
           <div class="btn-group btn-group-toggle mb-2">

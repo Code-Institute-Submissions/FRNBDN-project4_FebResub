@@ -6,7 +6,7 @@
             offset-1{%endif%}{% if comment.parent == false %} rounded-top offset-0 {%endif%}
             {% if forloop.last %} border-bottom rounded-bottom {%endif%} ">
     <div class="comment-info">
-      <strong>{{ comment.commenter.username}}</strong> on {{ comment.created_on|naturaltime }}
+      <strong>{{ comment.commenter.username}}</strong> on {{ comment.created_on|naturaltime }} {% if comment.edited %} (edited {{ comment.updated_on|naturaltime }}){% endif %}  
     </div>
     <p>
       {{ comment.body|linebreaks }}
