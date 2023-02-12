@@ -7,14 +7,14 @@
     <div class="left-column col-lg-7 offset-lg-1 infinite-container">
       <div class="post-container card flex-column p-4">
         <!-- Register Form -->
-        <h1>Register</h1>
+        <h3>Register</h3>
         <form method="post" >
           {% csrf_token %}
           {{ user_reg_form | crispy }}
           <button type="submit" class="btn btn-primary w-100">Register</button>
         </form>
         <!-- Redirect Links -->
-        <a href="{% url 'login' %}" class="btn btn-link"> Already registered an account? </a>
+        <a href="{% url 'login' %}" class="btn btn-link"> Already have an account? </a>
       </div>
     </div>
   </div>
