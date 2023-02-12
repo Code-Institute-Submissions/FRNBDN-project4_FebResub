@@ -31,7 +31,7 @@
             <a class="navbar-brand d-block d-sm-none m-1" href="{% url 'home' %}"><span class="logo-font">B</span></a>
           </div>
           <!-- Mobile Settings Display Start -->
-          <div class="mx-1 flex-fill text-right d-block d-lg-none">
+          <div class="mx-1 d-flex flex-wrap text-right d-block d-lg-none">
           {% if user.is_authenticated%}
             <a href="{% url 'user' user.username %}"><i class="fa-solid fa-user"></i> {{user.username}}: </a>
             <span><i class="fa-solid fa-envelopes-bulk"></i>:{{user.number_of_posts}}</span> 
@@ -42,8 +42,8 @@
           <div class="d-flex flex-wrap flex-fill text-center d-block d-lg-none"> 
             <a class="btn btn-primary flex-fill m-1" href="{% url 'logout' %}">Logout <i class="fa-solid fa-right-from-bracket"></i></a>
           {%else%}
-            <a class="btn btn-primary flex-fill m-1" href="{% url 'login' %}">Login <i class="fa-solid fa-right-to-bracket"></i></a>
-            <a class="btn btn-primary flex-fill m-1" href="{% url 'register' %}">Register <i class="fa-solid fa-user-plus"></i></a>
+            <a class="btn btn-primary flex-nowrap flex-fill m-1" href="{% url 'login' %}">Login <i class="fa-solid fa-right-to-bracket"></i></a>
+            <a class="btn btn-primary flex-nowrap flex-fill m-1" href="{% url 'register' %}">Register <i class="fa-solid fa-user-plus"></i></a>
           {%endif%}
           {% if user.is_admin %}
             <a class="btn btn-primary flex-fill m-1" href="{% url 'admin:index' %}">Admin Page <i class="fa-solid fa-user-gear"></i></a>
