@@ -227,39 +227,91 @@ Reset screen
 
 After pressing reset password
 
-### !!!!succes screen neeeded!!!
+![checkinbox](static/images/checkinbox.png)
 
 Email that is sent out 
 
 ![emailsent](static/images/emailsent.png)
 
-Link in email, I couldnt get the email or this page to take my templates over the standard templates provided in django.
+![email](static/images/email.png)
 
-### !!!!EMAIL CLICKTHROUGH NEEDED!!!
+The email link sends you to the page below, I couldnt get the email or this page to take my templates over the standard templates provided in django.
+
+![passwordreset](static/images/passwordenter.png)
 
 ### Password Update
+Password update is accessed through your profile page when logged in. This is the form:
+
+![passwordchanges](static/images/passwordchanges.png)
 
 ### Admin
+As an admin you have access to all comments, posts and accounts. You have the ability to edit, create or delete posts/comments/accounts from here and anything you might need as an administrator of this blog/forum website.
+
+![adminoptions](static/images/adminoptions.png)
+
+Here is how the admin displays accounts, with clear view of all the options available to the admin.
+
+![adminaccounts](static/images/adminaccounts.png)
+
+![adminaccount](static/images/adminaccount.png)
+
+Here is post admin
+List of potsts
+
+![adminposts](static/images/adminposts.png)
+
+![adminpost1](static/images/adminpost1.png)
+Here below the admin can decide to delist the post, but this delists it from the main feed,
+This can only be done by admins, but you can still access the post on the users post history, this can be used to limit bandwagoning towards unpopular opinions. Obviously not the best solution(given that it removes reach for the post), but better than nothing.
+
+![adminpost2](static/images/adminpost2.png)
 
 ## Future Features
+Features that were left out are listed below in no particular order. Seeing as the website is very broad in scope, there are plenty of features that could be implemented in the future.
 
 ### Comment Indentation Update
+The comment indentation has its flaws, as if enough replies gets stacked together eventually they will become so narrow that only 1 letter shows per row. This can be fixed to have a more dynamic way indenting and visually show that they are replies. Color coding the left border is an option too.
 
-### Comment Upvote/Downvote
+### Comment Likes/Dislikes
+This, the one above and below could be a full comment enhancement done together.
+
+But this one was left out from the project, althugh the backend models have support for these already. So adding these as a future feature is obvious.
 
 ### Comment Cascade on delete to Protect
 
+Having the comments that are replies protected if the parent comment gets deleted, currently they cascade. Its possible that great discussions might be deleted because they happened inside a reply, this would rectify that.
+
 ### Searchbar
 
-### Follow users
+Adding a searchbar so you can find posts you saw a long time ago without having to scroll through all posts since then.
 
-### Following feed
+### Follow profiles
+Adding the ability to follow profiles and having a feed of only posts from followed profiles as an option on the homepage.
+
+### Ordering based on feedback
+
+Odering posts and comments based on likes/dislikes, maybe counting each like as +1hour and dislike -1hour in the ordering as a very simple algoithm.
 
 # Credits
 
-### Code
+### Code Resources
+Resources used for fixes, inspiraiton and knowledge.
+
+[Stack Overflow](https://stackoverflow.com)
+
+Code Institute I Think Therefore I Blog  - Walkthrough
+
+[Youtube](https://youtube.com)
+
+[Django Docs](https://www.djangoproject.com/)
+
+[Bootstrap Docs](https://getbootstrap.com/)
 
 ### Images
+
+The images on the website are posted by the users, it is the users responsibility to ensure that they are not infringing on any copyright. Blogrum is not responsible for any copyrighted material posted on our website.
+
+If you own the right of material posted on the webiste and you wish for it to be removed, please get in touch!
 
 ### Technologies used
 
@@ -280,15 +332,15 @@ Link in email, I couldnt get the email or this page to take my templates over th
 
 [ElephantSQL](https://www.elephantsql.com/) - used to manage a PostgreSQL database.
 
-[Bootstrap 5.2](https://getbootstrap.com/) - used to style the brunt of the project.
-
-[Jquery](https://jquery.com/) - to make DOM manipulation a bit less painful.
-
-[Lucidchart](https://www.lucidchart.com/pages/) used to make a database diagram.
+[Bootstrap](https://getbootstrap.com/) - used to style the brunt of the project.
 
 [Gitpod](https://www.gitpod.io/) - used to connect a browser based VScode to github.
 
-[Github](https://github.com/) - used for version control and deployment of the website.
+[Github](https://github.com/) - used for deployment of the website.
+
+[UI.DEV Amiresponsive](https://ui.dev/amiresponsive) - to create the different devices responsivness image in the beginning of the file
+
+[Lucidchart](https://www.lucidchart.com/pages/) used to make a database diagram.
 
 [Heroku](https://dashboard.heroku.com/) - to deploy the app.
 
@@ -300,29 +352,66 @@ Link in email, I couldnt get the email or this page to take my templates over th
 
 # Testing
 
+All features of the website were tested to ensure that they work properly, the documentation of the testing has been made in a separate [testing document](TESTING.md).
+
 ## Security Features and Defensive Design
 
 ### User authentication
+- Custom modles of djangos base user model was used for authentication functionality
+- Django super user is used to limit access to the admin panel.
 
 ### Form Validation
-
+All forms are checked on the frontend and/or the backend.
 
 ### Database Security
+The steps taken are as follows:
+- Every form in the project uses a CSRF(Cross-Site Request Forgery) Token.
+- All secret keys are stored in a separate env.py file that is only kept locally and in config variables on the hosting platform, never published.
 
 ## Deployment
+The deployment was done in largely two parts. 
+1. After starting my django app I deployed the then empty project to Heroku to ensure that everything was done properly well in advance to the production deployment, to avoid any potential deadline issues if there were to occur issues while deploying. 
+2. The latter being the full deployment
 
-### Local Deployment
+### Production Deployment
+The deployment consists of creating and linking up the heroku app and connecting it to the ElephantSQL Database. 
 
-### Production Deployment Initial
+After creating my django app I deployed the then empty project to Heroku to ensure that everything was done properly well in advance to the production deployment, to avoid any potential deadline issues if there were to occur issues while deploying. 
 
 #### Create Heroku app:
+1. Log in to Heroku.
+2. Create the app in the dashboard by clicking "New" and "Create new app" in the dropdown
+3. Name the app, choose the region closes to you and click create app.
 
-#### Connect Postgres Database:
+#### Create a image hosting platform with Cloudinary:
+1. Create a cloudinary account.
+2. Copy the API environment password to use as a config variable down below
+
+#### Create email to send out password reset through Gmail
+1. Create a gmail adress 
+2. Go to manage account > security 
+3. Add 2-step Verification to the account
+4. Select "other" from the dropdown Name the app
+5. Copy the password to use as a config variable down below
+
+#### Create ElephantSQL Database:
+1. Log in to ElephantSQL.
+2. Create the database isntance in the dashboard by clicking "Create new instace"
+3. Name the app, choose the plan and click choose region.
+4. Choose region, closes to you, click review.
+5. Click Create instance.
+6. Navigate to the detaisl apge database you created
+7. Copy the value of the URL column, (postgres://.....) to use as a config variable down below
+
+#### Connect ElephantSQL Database to Heroku App:
+1. Open the your on the Heroku Dashboard
+2. Navigate to the Settings tab and go to config vars, reveal them
+4. Add Config Vars Key: DATABASE_URL Value: URL from elephantSQL
 
 #### Deploy App on Heroku:
-
-### Production Deployment Update
-
-#### PostgreSQL database:
-
-## Acknowledgements
+1. Go to Settings > Config Vars > Reveal Config Vars
+2. Add a SECRET_KEY Variable
+3. Add the CLOUDINARY_URL Variable from the cloudinary account dashboard
+4. Add the EMAIL_HOST_PASSWORD Variable from the gmail app password
+5. Under Deployment method select github and choose the correct repository.
+6. Scroll down to Deploy and deploy the project.
