@@ -12,8 +12,8 @@
         <div class="w-100 d-flex flex-row justify-content-between align-items-baseline flex-wrap flex-md-nowrap">
           <div class="d-flex flex-row align-items-baseline flex-wrap">
             <h2 class="card-title d-none d-md-block">{{post.title}}</h2>
-            <h5 class="card-title d-block d-md-none">{{post.title}}</h5>
-            by:  <a href="{% url 'user' post.author.username %}">{{post.author.username}}</a> 
+            <h5 class="card-title d-block d-md-none mr-1">{{post.title}}</h5>
+            <span class="d-flex flex-nowrap">by:  <a href="{% url 'user' post.author.username %}">{{post.author.username}}</a> </span>
             <span class="d-flex no-wrap">
             <p class="text-muted pl-2 font-italic smaller"><span>{{post.created_on|naturaltime}}</span></p>
             <!-- Post Interactions if author -->
@@ -24,7 +24,7 @@
           </span>
           </div>
           <!-- Post Like/Dislike -->
-          <div class="btn-group btn-group-toggle">
+          <div class="btn-group btn-group-toggle mb-2">
             {% if user.is_authenticated %}
             <form class="d-inline" action="{% url 'post_like' post.slug %}" method="POST">
               {% csrf_token %}
@@ -35,8 +35,8 @@
               <button type="submit" name="post_id" value="{{post.slug}}" class="d-flex flex-no-wrap btn btn-light btn-right {% if disliked %} active {% endif %}"><i class="fa-solid fa-thumbs-down"></i>{{post.number_of_dislikes}}</button>
             </form>
             {% else %}
-            <span class="mr-2"><i class="fa-regular fa-thumbs-up"></i> {{post.number_of_likes}}</span>
-            <span ><i class="fa-regular fa-thumbs-down"></i> {{post.number_of_dislikes}}</span>
+            <span class="mr-2 d-flex flex-nowrap align-items-baseline"><i class="fa-regular fa-thumbs-up"></i> {{post.number_of_likes}}</span>
+            <span class="d-flex flex-nowrap align-items-baseline"><i class="fa-regular fa-thumbs-down "></i> {{post.number_of_dislikes}}</span>
             {% endif %}
           </div> 
         </div>
