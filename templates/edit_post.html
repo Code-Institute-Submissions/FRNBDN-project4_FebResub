@@ -9,7 +9,6 @@
       <div class="post-container card flex-column p-4">
         {% if user.is_authenticated %}
           {% if acccessdenied %}
-            <h2>Acces Denied</h2>
             <p>You have to be the owner to edit a post! </p>
             <a href="{% url 'home' %}" class="btn btn-primary"> Home </a>
           {% else %}
@@ -40,7 +39,7 @@
         {% else %}
         <div class="card d-flex flex-column">
           <!-- If not logged in -->
-          <p>You have to be logged in to post! </p>
+          <p>You have to be logged in to perform this action! </p>
           <div>
             <a href="{% url 'login' %}" class="btn btn-primary"> Login </a>
             <a href="{% url 'register' %}" class="btn btn-primary"> Register </a>
