@@ -81,7 +81,7 @@ def edit_post(request, slug):
     if post.author != request.user:
         form = PostForm()
         return render(request, 'edit_post.html',
-                      {'acessdenied': True})
+                      {'acccessdenied': True})
 
     if request.method == "POST":
         form = PostForm(request.POST, request.FILES, instance=post)
