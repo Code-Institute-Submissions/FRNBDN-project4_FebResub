@@ -15,9 +15,9 @@
             <h5 class="card-title d-block d-md-none mr-1">{{post.title}}</h5>
             <span class="d-flex flex-nowrap">by:  <a href="{% url 'user' post.author.username %}">{{post.author.username}}</a> </span>
             <span class="d-flex no-wrap">
-              <p class="text-muted pl-2 font-italic smaller"><span>{{post.created_on|naturaltime}}</span></p>
+              <span class="text-muted pl-2 font-italic smaller"><span>{{post.created_on|naturaltime}}</span></span>
               {% if post.edited %}
-              <p class="text-muted pl-2 font-italic smaller"><span>(edited {{post.updated_on|naturaltime}})</span></p>
+              <span class="text-muted pl-2 font-italic smaller"><span>(edited {{post.updated_on|naturaltime}})</span></span>
             </span>
             {% endif %}
             <!-- Post Interactions if author -->
@@ -34,11 +34,13 @@
             {% if user.is_authenticated %}
             <form class="d-inline" action="{% url 'post_like' post.slug %}" method="POST">
               {% csrf_token %}
-              <button type="submit" name="post_id" value="{{post.slug}}" class="d-flex flex-no-wrap btn btn-light btn-left {% if liked %} active {% endif %}"><i class="fa-solid fa-thumbs-up"></i> {{post.number_of_likes}}</button>
+              <button type="submit" name="post_id" value="{{post.slug}}" class="d-flex flex-no-wrap btn btn-light btn-left {% if liked %} active {% endif %}">
+                <i class="fa-solid fa-thumbs-up"></i> {{post.number_of_likes}}</button>
             </form>
             <form class="d-inline" action="{% url 'post_dislike' post.slug %}" method="POST">
               {% csrf_token %}
-              <button type="submit" name="post_id" value="{{post.slug}}" class="d-flex flex-no-wrap btn btn-light btn-right {% if disliked %} active {% endif %}"><i class="fa-solid fa-thumbs-down"></i>{{post.number_of_dislikes}}</button>
+              <button type="submit" name="post_id" value="{{post.slug}}" class="d-flex flex-no-wrap btn btn-light btn-right {% if disliked %} active {% endif %}">
+                <i class="fa-solid fa-thumbs-down"></i>{{post.number_of_dislikes}}</button>
             </form>
             {% else %}
             <span class="mr-2 d-flex flex-nowrap align-items-baseline"><i class="fa-regular fa-thumbs-up"></i> {{post.number_of_likes}}</span>
