@@ -19,7 +19,7 @@
           <!-- If not owner of comment -->
           <div class="card d-flex flex-column">
               <p>You have to be the owner to delete a comment! </p>
-              {% if user.is_authenticated == false %}
+              {% if user.is_authenticated %}
               <a class="btn btn-primary flex-fill m-1" href="{% url 'home' %}"> Home </a>
               <!-- If not logged in --> 
               {% else %}
