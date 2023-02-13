@@ -79,7 +79,9 @@ def create_post(request):
 def edit_post(request, slug):
     post = get_object_or_404(Post, slug=slug)
     if post.author != request.user:
-        return HttpResponse('You may only edit posts you have created.')
+        form = PostForm()
+        return render(request, 'edit_post.html',
+                      {'acessdenied': True})
 
     if request.method == "POST":
         form = PostForm(request.POST, request.FILES, instance=post)
@@ -95,8 +97,9 @@ def edit_post(request, slug):
         'thumbnail': post.thumbnail,
     }
     )
+    
     return render(request, 'edit_post.html',
-                  {'form': form, 'is_create': False})
+                  {'form': form, 'create': False})
 
 
 class PostLike(View):
@@ -176,8 +179,6 @@ class EditCommentView(View):
     """
     def get(self, request, pk):
         comment = get_object_or_404(Comment, pk=pk)
-        if comment.commenter != request.user:
-            return HttpResponse('You may only edit comments you have created.')
         form = CommentForm(instance=comment)
         return render(
             request,
