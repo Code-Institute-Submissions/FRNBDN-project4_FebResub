@@ -6,20 +6,20 @@
 <div class="container">
   <div class="row mb-0">
     <div class="col-lg-9">
-      <div class="post-container card flex-column p-4">
+      <div class="post-container card flex-column pt-4 px-4 pb-1">
         <!-- Post Thumbnail -->
         <img class="" src="{{post.thumbnail.url}}" alt="">
-        <div class="w-100 d-flex flex-row justify-content-between align-items-baseline flex-wrap flex-md-nowrap">
+        <div class="w-100 d-flex flex-row justify-content-between align-items-baseline flex-nowrap flex-sm-nowrap">
           <div class="d-flex flex-row align-items-baseline flex-wrap">
             <h2 class="card-title d-none d-md-block">{{post.title}}</h2>
             <h5 class="card-title d-block d-md-none mr-1">{{post.title}}</h5>
-            <span class="d-flex flex-nowrap">by:  <a href="{% url 'user' post.author.username %}">{{post.author.username}}</a> </span>
-            <span class="d-flex no-wrap">
+              <span class="d-flex flex-nowrap">by:  <a href="{% url 'user' post.author.username %}">{{post.author.username}}</a> </span>
+              <span class="d-flex no-wrap">
               <span class="text-muted pl-2 font-italic smaller"><span>{{post.created_on|naturaltime}}</span></span>
               {% if post.edited %}
               <span class="text-muted pl-2 font-italic smaller"><span>(edited {{post.updated_on|naturaltime}})</span></span>
+              {% endif %}
             </span>
-            {% endif %}
             <!-- Post Interactions if author -->
             {% if post.author == request.user %}
             <span class="d-flex no-wrap">
@@ -27,10 +27,9 @@
                 <a href="{% url 'post_delete' post.slug %}" class="text-danger pl-2 font-italic smaller">&lt;delete&gt;</a>
             </span>
             {% endif %}
-          
           </div>
           <!-- Post Like/Dislike -->
-          <div class="btn-group btn-group-toggle mb-2">
+          <div class="btn-group btn-group-toggle my-2">
             {% if user.is_authenticated %}
             <form class="d-inline" action="{% url 'post_like' post.slug %}" method="POST">
               {% csrf_token %}
@@ -50,8 +49,8 @@
         </div>
         <!-- Post Body -->
         <div class="post-body d-flex flex-column">
-          <div class="divider align-self-center"></div>
-          <p>{{ post.body|safe }}</p>
+          <div class="divider align-self-center mb-2"></div>
+          {{ post.body|safe }}
         </div>
       </div>  
     </div>
