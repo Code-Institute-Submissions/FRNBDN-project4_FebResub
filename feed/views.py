@@ -85,10 +85,16 @@ def edit_post(request, slug):
                       {'acccessdenied': True})
 
     if request.method == "POST":
+        old_title = post.title
+        old_body = post.body
+        old_thumbnail = post.thumbnail        
         form = PostForm(request.POST, request.FILES, instance=post)
         if form.is_valid():
             post = form.save(commit=False)
-            post.edited = True
+            if (old_title != post.title and
+                old_body != post.body and
+               old_thumbnail != post.thumbnail):
+                post.edited = True
             post.save()
         return redirect('post_detail', slug=post.slug)
 
