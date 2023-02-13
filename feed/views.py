@@ -68,6 +68,11 @@ def create_post(request):
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
+            file = request.FILES.get('thumbnail')
+            if not file.content_type.startswith('image/'):
+                form.add_error('thumbnail', 'File must be an image.')
+                return render(request, 'edit_post.html', {'form': form,
+                                                          'create': True})
             post = form.save(commit=False)
             post.author = request.user
             post.save()
@@ -87,9 +92,14 @@ def edit_post(request, slug):
     if request.method == "POST":
         old_title = post.title
         old_body = post.body
-        old_thumbnail = post.thumbnail        
+        old_thumbnail = post.thumbnail
         form = PostForm(request.POST, request.FILES, instance=post)
         if form.is_valid():
+            file = request.FILES.get('thumbnail')
+            if not file.content_type.startswith('image/'):
+                form.add_error('thumbnail', 'File must be an image.')
+                return render(request, 'edit_post.html', {'form': form,
+                                                          'create': True})
             post = form.save(commit=False)
             if (old_title != post.title and
                 old_body != post.body and
