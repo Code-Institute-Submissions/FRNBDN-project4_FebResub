@@ -8,6 +8,12 @@ def user_reg_view(request):
     """
     User Registration View.
     """
+    # Returns already logged in users home if they
+    # try to log in.
+    user = request.user
+    if user.is_authenticated:
+        return redirect('home')
+        
     context = {}
     if request.POST:
         form = UserRegistrationForm(request.POST)
