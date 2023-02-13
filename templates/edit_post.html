@@ -25,14 +25,15 @@
           {% csrf_token %}
         
           {{ form | crispy }}
-          <div>
-            <button class="btn btn-primary" type="submit" value="Upload"> 
+          <div class="d-flex flex-wrap flex-fill">
+            <button class="btn btn-primary m-1" type="submit" value="Upload"> 
             {% if create %}
               Create Post
             {% else %}
               Save Changes
             {% endif %}
-            </button>
+            </button> 
+            <a class="btn btn-secondary m-1" href="{{request.META.HTTP_REFERER}}"> Cancel </a> 
           </div>
         </form>
         {% endif %}
