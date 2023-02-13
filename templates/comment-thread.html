@@ -29,7 +29,7 @@
         <div class="card card-body">
             <!-- Comment Reply Form -->
             <form action="" method="POST" id="main_form" class="comment_form  w-100 d-flex">
-                <input type="text" name="body" class="form-control mr-1" placeholder="Type your reply here"> 
+                <input type="text" name="body" required="required" class="form-control mr-1" placeholder="Type your reply here"> 
                 <input type="hidden" value="{{ comment.pk }}" name="parent"> {% csrf_token %} 
                 <input class="btn btn-primary" type="submit" value="Submit">
           </form>
