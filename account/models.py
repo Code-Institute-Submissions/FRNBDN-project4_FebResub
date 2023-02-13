@@ -7,6 +7,7 @@ class MyAccountManager(BaseUserManager):
     """
     Account Creation Model.
     """
+
     def create_user(self, email, username, password=None):
         if not email:
             raise ValueError('You need to use an email to log in as a user!')
@@ -26,7 +27,7 @@ class MyAccountManager(BaseUserManager):
             email=self.normalize_email(email),
             username=username,
             password=password,
-            )
+        )
         user.is_admin = True
         user.is_staff = True
         user.is_superuser = True
@@ -75,7 +76,7 @@ class Account(AbstractBaseUser):
         count = 0
         for post in queryset:
             if post.likes.filter(id=self.id).exists():
-                count = count+1
+                count = count + 1
         return count
 
     def number_of_dislikes(self):
@@ -83,5 +84,5 @@ class Account(AbstractBaseUser):
         count = 0
         for post in queryset:
             if post.dislikes.filter(id=self.id).exists():
-                count = count+1
+                count = count + 1
         return count

@@ -12,7 +12,7 @@ class PostAdmin(SummernoteModelAdmin):
     list_filter = ('created_on', 'listed')
     prepopulated_fields = {
         'slug': ('title',)
-        }
+    }
 
 
 @admin.register(Comment)

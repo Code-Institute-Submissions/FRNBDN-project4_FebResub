@@ -86,7 +86,7 @@ def user_view(request, username):
         if form.is_valid():
             form.initial = {
                 'username': request.POST['username'],
-                }
+            }
         form.save()
         new_username = form.cleaned_data['username']
         context['username'] = new_username

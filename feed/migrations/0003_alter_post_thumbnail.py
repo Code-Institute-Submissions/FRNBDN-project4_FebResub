@@ -14,6 +14,9 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='post',
             name='thumbnail',
-            field=cloudinary.models.CloudinaryField(default='placeholder', max_length=255, verbose_name='image'),
+            field=cloudinary.models.CloudinaryField(
+                default='placeholder',
+                max_length=255,
+                verbose_name='image'),
         ),
     ]

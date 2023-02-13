@@ -6,8 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('feed', '0005_alter_comment_created_on_alter_post_created_on_and_more'),
-    ]
+        ('feed', '0005_alter_comment_created_on_alter_post_created_on_and_more'), ]
 
     operations = [
         migrations.AddField(

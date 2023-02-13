@@ -19,6 +19,7 @@ class PostDetail(View):
     """
     Post Detail View.
     """
+
     def get(self, request, slug, *args, **kwargs):
         queryset = Post.objects.filter(listed=True)
         post = get_object_or_404(queryset, slug=slug)
@@ -97,7 +98,7 @@ def edit_post(request, slug):
         'thumbnail': post.thumbnail,
     }
     )
-    
+
     return render(request, 'edit_post.html',
                   {'form': form, 'create': False})
 
@@ -106,6 +107,7 @@ class PostLike(View):
     """
     PostLike View.
     """
+
     def post(self, request, slug):
         post = get_object_or_404(Post, slug=slug)
 
@@ -126,6 +128,7 @@ class PostDislike(View):
     """
     PostDislike View.
     """
+
     def post(self, request, slug):
         post = get_object_or_404(Post, slug=slug)
 
@@ -161,7 +164,7 @@ class CommentDeleteView(View):
             request,
             'comment_confirm_delete.html',
             {'comment': comment}
-            )
+        )
 
     def post(self, request, pk):
         comment = get_object_or_404(Comment, pk=pk)
@@ -174,6 +177,7 @@ class EditCommentView(View):
     """
     Comment Edit View.
     """
+
     def get(self, request, pk):
         comment = get_object_or_404(Comment, pk=pk)
         form = CommentForm(instance=comment)
@@ -183,8 +187,8 @@ class EditCommentView(View):
             {
                 'form': form,
                 'comment': comment
-                }
-            )
+            }
+        )
 
     def post(self, request, pk):
         comment = get_object_or_404(Comment, pk=pk)

@@ -33,10 +33,12 @@ DEBUG = 'DEV' in os.environ
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 ALLOWED_HOSTS = ['blogrum.herokuapp.com', 'localhost', '127.0.0.1']
-CSRF_TRUSTED_ORIGINS = ['https://blogrum.herokuapp.com', "https://8000-frnbdn-project4-d9qa47f21yy.ws-us86.gitpod.io"]
+CSRF_TRUSTED_ORIGINS = [
+    'https://blogrum.herokuapp.com',
+    "https://8000-frnbdn-project4-d9qa47f21yy.ws-us86.gitpod.io"]
 
 SUMMERNOTE_CONFIG = {
-     'width': '100%', }
+    'width': '100%', }
 
 # Application definition
 
@@ -54,7 +56,7 @@ INSTALLED_APPS = [
     'cloudinary',
     'django_summernote',
     'crispy_forms',
-    
+
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

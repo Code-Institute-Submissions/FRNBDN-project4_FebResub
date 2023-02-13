@@ -36,7 +36,7 @@ class UpdateUsernameForm(forms.ModelForm):
         username = self.cleaned_data['username']
         try:
             account = Account.objects.exclude(pk=self.instance.pk).get(
-                                                     username=username)
+                username=username)
         except Account.DoesNotExist:
             return username
         raise forms.ValidationError('Username "%s" is already taken'
