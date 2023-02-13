@@ -166,6 +166,7 @@ The project was tested thoroughly with the developer tools in the chrome browser
 | Post Body  Field      | Leave Empty | On Submit: Error message: Can't be empty | Pass      |
 | Image Field           | Leave Empty | On Submit: Post Successfuly Create   | Pass      |
 | Image Field           | Upload Image | On Submit: Post Successfuly Create  | Pass      |
+| Image Field           | Upload Other filetype | On Submit: Error message display| Pass      |
 | Cancel Button              | Click   | Returns you to previous page | Pass |
 | Create post button         | Click   | Submits and redirect to post detail | Pass |
 
@@ -193,6 +194,7 @@ The project was tested thoroughly with the developer tools in the chrome browser
 | Post Body Field      | Input text | On Submit: Post Successfuly Create | Pass      |
 | Image Field           | Leave Empty | On Submit: Post Successfuly Create   | Pass      |
 | Image Field           | Upload Image | On Submit: Post Successfuly Create  | Pass      |
+| Image Field           | Upload Other filetype | On Submit: Error message display| Pass      |
 | Cancel Button              | Click   | Returns you to previous page | Pass |
 | Save changes button         | Click   | Submits and redirect to post detail | Pass |
 
@@ -361,6 +363,6 @@ These bugs lsited below have also been added to the project board in a seperate 
 **Solution**: Fixed by changing the variables in the template to reference the profile and not the user.
 
 ### Bug: 
-**Description**: 
+**Description**: When uploading a file that is not an image, you get redirected to a 500 error message page instead of getting an error message. 
 
-**Solution**: 
+**Solution**: The issue was closed and presumed completed after adding the attribute to accept only images to the input field in the html. However the issue persisted so the solution that worked as adding validators to the edit post/create post views that checks the file type and adds an error to the form if not an image, blocking any form submissions.
