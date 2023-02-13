@@ -198,13 +198,15 @@ class EditCommentView(View):
 
     def post(self, request, pk):
         comment = get_object_or_404(Comment, pk=pk)
+        old_comment = comment.body
         parent = comment.parent
         slug = comment.post.slug
         form = CommentForm(request.POST, instance=comment)
         if form.is_valid():
             comment = form.save(commit=False)
             comment.parent = parent
-            comment.edited = True
+            if old_comment != comment.body:
+                comment.edited = True
             comment.save()
             return redirect('post_detail', slug=slug)
         return redirect('post_detail', slug=slug)
