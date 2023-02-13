@@ -344,9 +344,9 @@ If you own the right of material posted on the webiste and you wish for it to be
 
 [Heroku](https://dashboard.heroku.com/) - to deploy the app.
 
-[JShint](https://jshint.com/) - used to validate javascript.
+[W3C Validator](https://validator.w3.org/#validate_by_uri) - used to validate HTML.
 
-[NuHtmlChecker](https://validator.w3.org/nu/) - used to validate HTML.
+[W3C Jigsaw Validator](https://jigsaw.w3.org/css-validator/) - used to validate CSS.
 
 [UI.DEV Amiresponsive](https://ui.dev/amiresponsive) - to create the different devices responsivness image in the beginning of the file..
 
